@@ -1,5 +1,5 @@
-import * as Repo from '../../repo'
+import * as Listings from '../../listings'
 
 export default {
-  [Repo.name]: Repo.query,
+  [Listings.name]: Listings.query,
 }
