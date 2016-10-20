@@ -21,7 +21,9 @@
   },
   "scripts": {
     "lint": "eslint --config config/.eslintrc.js server/",
-    "start": "NODE_ENV=development nodemon -w server --exec 'npm run lint && babel-node server'",
+    "start": "per-env",
+    "start:development": "NODE_ENV=development nodemon -w server --exec 'npm run lint && babel-node server'",
+    "start:production": "node index.js",
     "build": "webpack --config config/webpack.config.server.js"
   },
   "repository": {
@@ -56,6 +58,7 @@
     "express-graphql": "^0.5.4",
     "graphql": "^0.7.2",
     "graphql-relay": "^0.4.3",
-    "node-fetch": "^1.6.3"
+    "node-fetch": "^1.6.3",
+    "per-env": "^1.0.2"
   }
 }
