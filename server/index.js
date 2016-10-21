@@ -1,5 +1,6 @@
 import chalk from 'chalk'
 import express from 'express'
+import cors from 'cors'
 import graphqlHTTP from 'express-graphql'
 // TODO - DataLoader caching -> https://github.com/facebook/dataloader
 // import DataLoader from 'dataloader'
@@ -11,6 +12,12 @@ import schema from './shared/schema'
 
 // all aboard the App Express 🚂
 const app = express()
+
+// enable cors
+app.use(cors())
+
+// enable cors preflight on /graphql requests
+app.options(GRAPHQL_PATH, cors())
 
 // setup GraphQL server
 // TODO - could add auth middleware here to protect route
