@@ -3,7 +3,6 @@ import queries from '../queries'
 
 const Query = new GraphQLObjectType({
   name: 'RootQuery',
-  description: 'The Root Query',
   fields: () => ({ ...queries })
 })
 

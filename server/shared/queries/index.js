@@ -1,5 +1,5 @@
-import * as Listings from '../../listings'
+import * as Listing from '../../listing'
 
 export default {
-  [Listings.name]: Listings.query,
+  ...Listing.queries
 }

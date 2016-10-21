@@ -1,13 +1,12 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql'
-import { type } from './constants'
+import { name } from './constants'
 
-const ListingsType = new GraphQLObjectType({
-  name: type,
-  description: 'Listings',
+const ListingType = new GraphQLObjectType({
+  name,
   fields: () => ({
     id: { type: GraphQLString },
     location: { type: GraphQLString },
   })
 })
 
-export default ListingsType
+export default ListingType
