@@ -1,9 +1,7 @@
 import { GraphQLInt, GraphQLFloat, GraphQLList } from 'graphql'
-import * as API from '../shared/services/api'
-import Type from './type'
 
-// TODO - abstract?
-const getAllListingsByLocation = ({ lng, lat, radius }) => API.get(`listing/search?lng=${lng}&lat=${lat}&radius=${radius}&page=0`).then( json => json.content )
+import Type from './type'
+import * as selectors from './selectors'
 
 // TODO - abstract?
 const searchArgs = {
@@ -12,22 +10,14 @@ const searchArgs = {
   radius: { type: GraphQLInt },
 }
 
-const queries = {
-  listings: {
-    type: new GraphQLList(Type),
-    args: {
-      ...searchArgs,
-    },
-    // TODO - need to get ALL listings here -> not just active
-    resolve: (root, args) => getAllListingsByLocation(args)
-  },
-  activeListings: {
-    type: new GraphQLList(Type),
-    args: {
-      ...searchArgs,
-    },
-    resolve: (root, args) => getAllListingsByLocation(args).then( listings => listings.filter( l => l.listed && !l.booked ) )
-  }
+export const listings = {
+  type: new GraphQLList(Type),
+  args: { ...searchArgs },
+  resolve: (root, args) => selectors.getAllListingsByLocation(args)
 }
 
-export default queries
+export const activeListings = {
+  type: new GraphQLList(Type),
+  args: { ...searchArgs },
+  resolve: (root, args) => selectors.getAllListingsByLocation(args).then( listings => listings.filter( l => l.listed && !l.booked ) )
+}
