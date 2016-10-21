@@ -1,6 +1,6 @@
 # Unrest
 
-> GraphQL proxy to Unlease REST API
+> 🌀  GraphQL proxy to Unlease REST API
 
 ## Setup
 

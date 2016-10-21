@@ -21,7 +21,7 @@ const server = app.listen( PORT, HOST, () => {
   const host = server.address().address
   const port = server.address().port
 
-  console.log('  ⚗  U N R E S T at:\n')
+  console.log('  🌀  U N R E S T at:\n')
   console.log('  ' + chalk.cyan(`http://${host}:${port}\n`))
 
   // notifier in development
