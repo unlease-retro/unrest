@@ -1,8 +1,9 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql'
+
 import queries from '../queries'
 
 const Query = new GraphQLObjectType({
-  name: 'RootQuery',
+  name: 'Query',
   fields: () => ({ ...queries })
 })
 

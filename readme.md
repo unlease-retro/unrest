@@ -19,3 +19,10 @@ npm start
 ```
 npm run build
 ```
+
+## Generate schema
+
+* Generate `data/schema.json` for `babel-relay-plugin`
+```
+npm run schema
+```

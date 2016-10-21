@@ -24,7 +24,8 @@
     "start": "per-env",
     "start:development": "NODE_ENV=development nodemon -w server --exec 'npm run lint && babel-node server'",
     "start:production": "node index.js",
-    "build": "webpack --config config/webpack.config.server.js"
+    "build": "webpack --config config/webpack.config.server.js",
+    "schema": "babel-node scripts/schema.js"
   },
   "repository": {
     "type": "git",

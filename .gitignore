@@ -19,6 +19,7 @@ node_modules/
 
 # Release #
 ######################
+data/
 public/
 
 # Editors #
