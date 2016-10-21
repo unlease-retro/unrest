@@ -13,3 +13,9 @@ npm i
 ```
 npm start
 ```
+
+## Release
+
+```
+npm run build
+```
