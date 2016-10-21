@@ -5,7 +5,7 @@ import graphqlHTTP from 'express-graphql'
 // import DataLoader from 'dataloader'
 
 import { isDevelopment } from './shared/util'
-import { HOST, PORT } from './shared/constants'
+import { HOST, PORT, GRAPHQL_PATH } from './shared/constants'
 
 import schema from './shared/schema'
 
@@ -13,7 +13,8 @@ import schema from './shared/schema'
 const app = express()
 
 // setup GraphQL server
-app.use( graphqlHTTP({ schema, graphiql: isDevelopment }) )
+// TODO - could add auth middleware here to protect route
+app.use(GRAPHQL_PATH, graphqlHTTP({ schema, graphiql: isDevelopment }))
 
 // start Express server
 const server = app.listen( PORT, HOST, () => {
@@ -22,7 +23,7 @@ const server = app.listen( PORT, HOST, () => {
   const port = server.address().port
 
   console.log('  🌀  U N R E S T at:\n')
-  console.log('  ' + chalk.cyan(`http://${host}:${port}\n`))
+  console.log('  ' + chalk.cyan(`http://${host}:${port}${GRAPHQL_PATH}\n`))
 
   // notifier in development
   if (isDevelopment) require('node-notifier').notify({ title: '⚗  U N R E S T', message: 'Server up', sound: 'Submarine' })
