@@ -6,4 +6,4 @@ import fetch from 'node-fetch'
 
 import { API } from '../constants'
 
-export const get = route => fetch(`${API}/${route}`, { method: 'GET', credentials: 'include' }).then( res => res.json() )
+export const get = (route, token) => fetch(`${API}/${route}`, { method: 'GET', headers: { 'Authorization': token } }).then( res => res.json() )

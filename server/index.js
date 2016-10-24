@@ -20,8 +20,7 @@ app.use(cors())
 app.options(GRAPHQL_PATH, cors())
 
 // setup GraphQL server
-// TODO - could add auth middleware here to protect route
-app.use(GRAPHQL_PATH, graphqlHTTP({ schema, graphiql: isDevelopment }))
+app.use(GRAPHQL_PATH, graphqlHTTP( req => ({ schema, graphiql: isDevelopment, context: { token: req.headers.authorization } }) ))
 
 // start Express server
 const server = app.listen( PORT, HOST, () => {

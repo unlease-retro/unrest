@@ -1,7 +1,7 @@
 import { GraphQLInt, GraphQLFloat, GraphQLList } from 'graphql'
 
 import Type from './type'
-import * as selectors from './selectors'
+import * as service from './service'
 
 // TODO - abstract?
 const searchArgs = {
@@ -13,11 +13,11 @@ const searchArgs = {
 export const listings = {
   type: new GraphQLList(Type),
   args: { ...searchArgs },
-  resolve: (root, args) => selectors.getAllListingsByLocation(args)
+  resolve: (root, args, { token }) => service.fetchAllListingsByLocation(token, args)
 }
 
 export const activeListings = {
   type: new GraphQLList(Type),
   args: { ...searchArgs },
-  resolve: (root, args) => selectors.getAllListingsByLocation(args).then( listings => listings.filter( l => l.listed && !l.booked ) )
+  resolve: (root, args, { token }) => service.fetchAllListingsByLocation(token, args).then( listings => listings.filter( l => l.listed && !l.booked ) )
 }
