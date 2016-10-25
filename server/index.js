@@ -3,8 +3,6 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import graphqlHTTP from 'express-graphql'
-// TODO - DataLoader caching -> https://github.com/facebook/dataloader
-// import DataLoader from 'dataloader'
 
 import { isDevelopment } from './shared/util'
 import { HOST, PORT, GRAPHQL_PATH } from './shared/constants'
