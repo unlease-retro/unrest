@@ -63,7 +63,6 @@
     "form-data": "^2.1.1",
     "graphql": "^0.7.2",
     "graphql-relay": "^0.4.3",
-    "multer": "^1.2.0",
     "node-fetch": "^1.6.3",
     "per-env": "^1.0.2"
   }
