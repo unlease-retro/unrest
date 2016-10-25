@@ -1,11 +1,11 @@
 // import Mutations from './mutations'
 import * as queries from './queries'
-import * as selectors from './selectors'
+import * as service from './service'
 import Type from './type'
 
 export {
   // mutations,
   queries,
-  selectors,
+  service,
   Type,
 }

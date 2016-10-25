@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql'
 
 import { name } from './constants'
-import { Type as UserType, selectors as UserSelectors } from '../user'
+import { Type as UserType, service as UserService } from '../user'
 
 const ListingType = new GraphQLObjectType({
   name,
@@ -10,7 +10,7 @@ const ListingType = new GraphQLObjectType({
     location: { type: GraphQLString },
     user: {
       type: UserType,
-      resolve: listing => UserSelectors.getUserById(listing.embeddedUser.id)
+      resolve: listing => UserService.getUserById(listing.embeddedUser.id)
     },
   })
 })
