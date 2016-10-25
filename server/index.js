@@ -51,6 +51,6 @@ const server = app.listen( PORT, HOST, () => {
   console.log('  ' + chalk.cyan(`http://${host}:${port}${GRAPHQL_PATH}\n`))
 
   // notifier in development
-  if (isDevelopment) require('node-notifier').notify({ title: '⚗  U N R E S T', message: 'Server up', sound: 'Submarine' })
+  if (isDevelopment) require('node-notifier').notify({ title: '🌀  U N R E S T', message: 'Server up', sound: 'Submarine' })
 
 })
