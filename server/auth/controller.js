@@ -18,9 +18,7 @@ export const refresh = (req, res, next) => {
   return Auth.refresh(req.body)
     .then( auth => {
 
-      res.json({ ...auth })
-
-      res.sendStatus(200)
+      res.status(200).json({ ...auth })
 
       return next()
 
