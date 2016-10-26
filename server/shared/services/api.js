@@ -7,10 +7,16 @@ import FormData from 'form-data'
 
 import { API } from '../constants'
 
+// -----
 // GET
+// -----
+
 export const get = (route, token) => fetch(`${API}/${route}`, { method: 'GET', headers: { 'Authorization': token } }).then( res => res.json() )
 
+// -----
 // POST
+// -----
+
 export const post = (route, data, token) => fetch(`${API}/${route}`, {
   method: 'POST',
   headers: {
@@ -21,7 +27,10 @@ export const post = (route, data, token) => fetch(`${API}/${route}`, {
   body: JSON.stringify(data),
 }).then( res => res.json() )
 
+// -----
 // POST FORM
+// -----
+
 export const postForm = (route, data, token) => {
 
   const form = new FormData()
