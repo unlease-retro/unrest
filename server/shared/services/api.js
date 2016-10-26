@@ -24,6 +24,6 @@ export const postForm = (route, data, token) => {
       'Authorization': token
     },
     body: form,
-  }).then( res => res.json() )
+  }).then( res => res.json().then( json => ({ status: res.status, json }) ) )
 
 }

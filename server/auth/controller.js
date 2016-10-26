@@ -3,9 +3,9 @@ import * as Auth from './service'
 export const login = (req, res, next) => {
 
   return Auth.login(req.body)
-    .then( auth => {
+    .then( ({ status, json }) => {
 
-      res.status(200).json({ ...auth })
+      res.status(status).json(json)
 
       return next()
 
@@ -16,9 +16,9 @@ export const login = (req, res, next) => {
 export const refresh = (req, res, next) => {
 
   return Auth.refresh(req.body)
-    .then( auth => {
+    .then( ({ status, json }) => {
 
-      res.status(200).json({ ...auth })
+      res.status(status).json(json)
 
       return next()
 
