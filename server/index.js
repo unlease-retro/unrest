@@ -5,7 +5,7 @@ import cors from 'cors'
 import graphqlHTTP from 'express-graphql'
 
 import { isDevelopment } from './shared/util'
-import { HOST, PORT, GRAPHQL_PATH } from './shared/constants'
+import { HOST, PORT, GRAPHQL_PATH, ERROR_CODES } from './shared/constants'
 
 import schema from './shared/schema'
 import routes from './routes'
@@ -23,8 +23,11 @@ app.use(cors())
 // enable cors preflight on /graphql requests
 app.options(GRAPHQL_PATH, cors())
 
+// custom GraphQL error formatter
+const formatError = ({ message, locations, stack }) => ({ code: ERROR_CODES[message], message, locations, stack })
+
 // setup GraphQL server
-app.use(GRAPHQL_PATH, graphqlHTTP( req => ({ schema, graphiql: isDevelopment, context: { token: req.headers.authorization } }) ))
+app.use(GRAPHQL_PATH, graphqlHTTP( req => ({ schema, graphiql: isDevelopment, context: { token: req.headers.authorization }, formatError }) ))
 
 // API routes
 app.use('/api', routes)
@@ -36,7 +39,7 @@ app.use( (err, req, res, next) => {
   if (res.headersSent) return next(err)
 
   console.error(err.stack)
-  res.status(500).json({errMsg: err.message})
+  res.status(500).json({ errMsg: err.message })
 
 })
 /* eslint-enable no-unused-vars */
