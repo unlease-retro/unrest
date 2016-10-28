@@ -13,7 +13,13 @@ const searchArgs = {
 export const listings = {
   type: new GraphQLList(Type),
   args: { ...searchArgs },
-  resolve: (root, args, { token }) => service.fetchAllListingsByLocation(token, args)
+  resolve: (root, args, { token }) => service.fetchAllListingsByLocation(token, args).then( ({ content, error }) => {
+
+    if (error) throw new Error(error)
+
+    return content
+
+  })
 }
 
 export const activeListings = {
