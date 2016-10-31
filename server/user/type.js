@@ -1,6 +1,7 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql'
 
 import { name } from './constants'
+import { Type as NotificationType, service as NotificationService } from '../notification'
 
 const UserType = new GraphQLObjectType({
   name,
@@ -9,6 +10,10 @@ const UserType = new GraphQLObjectType({
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
     avatar: { type: GraphQLString },
+    notifications: {
+      type: NotificationType,
+      resolve: (user, args, { token }) => NotificationService.getNotificationById(user.id, token)
+    },
   })
 })
 
