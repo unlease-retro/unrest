@@ -10,7 +10,7 @@ const ListingType = new GraphQLObjectType({
     location: { type: GraphQLString },
     user: {
       type: UserType,
-      resolve: listing => UserService.getUserById(listing.embeddedUser.id)
+      resolve: (listing, args, { token }) => UserService.getUserById(listing.embeddedUser.id, token)
     },
   })
 })
