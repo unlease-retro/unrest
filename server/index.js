@@ -26,8 +26,11 @@ app.options(GRAPHQL_PATH, cors())
 // custom GraphQL error formatter
 const formatError = ({ message, locations, stack }) => ({ code: ERROR_CODES[message], message, locations, stack })
 
-// setup GraphQL server
-app.use(GRAPHQL_PATH, graphqlHTTP( req => ({ schema, graphiql: isDevelopment, context: { token: req.headers.authorization }, formatError }) ))
+// declare graphqlSettings up front rather than every request to prevent unnecessary garbage collection
+const graphqlSettings = req => ({ schema, graphiql: isDevelopment, pretty: isDevelopment, context: { token: req.headers.authorization }, formatError })
+
+// GraphQL server route
+app.use(GRAPHQL_PATH, graphqlHTTP(graphqlSettings))
 
 // API routes
 app.use('/api', routes)
