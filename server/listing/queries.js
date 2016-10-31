@@ -16,11 +16,11 @@ const searchArgs = {
 export const listings = {
   type: new GraphQLList(Type),
   args: { ...searchArgs },
-  resolve: (root, args, { token }) => service.fetchAllListingsByLocation(token, args).then( ({ content, error }) => {
+  resolve: (root, args, { token }) => service.fetchListings(token, args).then( json => {
 
-    if (error) throw new Error(error)
+    if (json.error) throw new Error(json.error)
 
-    return content
+    return json
 
   })
 }
