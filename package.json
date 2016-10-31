@@ -63,6 +63,7 @@
     "graphql": "^0.7.2",
     "graphql-relay": "^0.4.3",
     "node-fetch": "^1.6.3",
-    "per-env": "^1.0.2"
+    "per-env": "^1.0.2",
+    "query-string": "^4.2.3"
   }
 }

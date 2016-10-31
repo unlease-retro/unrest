@@ -1,13 +1,16 @@
-import { GraphQLInt, GraphQLFloat, GraphQLList } from 'graphql'
+import { GraphQLBoolean, GraphQLInt, GraphQLFloat, GraphQLList, GraphQLString } from 'graphql'
 
 import Type from './type'
 import * as service from './service'
 
-// TODO - abstract?
 const searchArgs = {
   lng: { type: GraphQLFloat },
   lat: { type: GraphQLFloat },
   radius: { type: GraphQLInt },
+  startDateInNextDays: { type: GraphQLInt },
+  listed: { type: GraphQLBoolean },
+  sortBy: { type: GraphQLString },
+  direction: { type: GraphQLString },
 }
 
 export const listings = {
@@ -20,10 +23,4 @@ export const listings = {
     return content
 
   })
-}
-
-export const activeListings = {
-  type: new GraphQLList(Type),
-  args: { ...searchArgs },
-  resolve: (root, args, { token }) => service.fetchAllListingsByLocation(token, args).then( listings => listings.filter( l => l.listed && !l.booked ) )
 }
