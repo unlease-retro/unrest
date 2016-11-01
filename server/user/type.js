@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLInt, GraphQLString } from 'graphql'
+import { GraphQLObjectType, GraphQLFloat, GraphQLString } from 'graphql'
 
 import { name } from './constants'
 import { Type as NotificationType, service as NotificationService } from '../notification'
@@ -11,10 +11,7 @@ const UserType = new GraphQLObjectType({
     email: { type: GraphQLString },
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
-    // TODO - can't be INT
-    lastLoggedInAt: { type: GraphQLInt },
-    // TODO - phone = phoneVerification.contactNumber
-    // phoneVerification: { type: GraphQLString },
+    lastLoggedInAt: { type: GraphQLFloat },
     notifications: {
       type: NotificationType,
       resolve: (user, args, { token }) => NotificationService.getNotificationById(user.id, token)
