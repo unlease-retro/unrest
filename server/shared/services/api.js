@@ -47,3 +47,17 @@ export const postForm = (route, data, token) => {
   }).then( res => res.json().then( json => ({ status: res.status, json }) ) )
 
 }
+
+// -----
+// PUT
+// -----
+
+export const put = (route, data, token) => fetch(`${API}/${route}`, {
+  method: 'PUT',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': token
+  },
+  body: JSON.stringify(data),
+}).then( res => res.json() )
