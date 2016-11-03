@@ -1,7 +1,7 @@
 import { GraphQLBoolean, GraphQLString } from 'graphql'
 
 import Type from './type'
-// import * as service from './service'
+import * as service from './service'
 
 export const updateHostStatus = {
   type: Type,
@@ -10,13 +10,11 @@ export const updateHostStatus = {
     leakage: { type: GraphQLBoolean },
     nonResponsive: { type: GraphQLBoolean },
   },
-  resolve: (root, args) => {
+  resolve: (root, args, { token }) => service.updateHostStatus(token, args).then( json => {
 
-    const listing = Object.assign({}, args)
+    if (json.error) throw new Error(json.error)
 
-    // TODO - API work here
+    return json
 
-    return listing
-
-  }
+  })
 }
