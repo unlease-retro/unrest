@@ -21,7 +21,7 @@ export const updateHostStatus = mutationWithClientMutationId({
 
     if (json.error) throw new Error(json.error)
 
-    return json
+    return input
 
   })
 })
