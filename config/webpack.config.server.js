@@ -17,12 +17,6 @@ module.exports = {
     filename: 'index.js'
   },
 
-  // resolve: {
-  //   alias: {
-  //     components: PATHS.components
-  //   }
-  // },
-
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
