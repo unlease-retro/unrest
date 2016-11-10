@@ -42,7 +42,7 @@ task makeDeb(type: Deb) {
     packageName = 'unlease-ql'
     postInstall file('buildScripts/deb-postInstall.sh')
 
-    into '/opt/unlease/app/'
+    into '/opt/unlease/ql/'
     from('build/') {
 
     }
