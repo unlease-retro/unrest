@@ -39,7 +39,7 @@ task makeDeb(type: Deb) {
     dependsOn << copyDocs
     user = 'deploy'
     version = '0.' + (env.containsKey("GIT_COMMIT") ? env.GIT_COMMIT : '0.0')
-    packageName = 'unlease-app'
+    packageName = 'unlease-ql'
     postInstall file('buildScripts/deb-postInstall.sh')
 
     into '/opt/unlease/app/'
