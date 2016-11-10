@@ -1,10 +1,11 @@
 const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const PATHS = {
   server: path.resolve(__dirname, '../server'),
-  dist: path.resolve(__dirname, '../public'),
+  dist: path.resolve(__dirname, '../build'),
   modules: path.resolve(__dirname, '../node_modules')
 }
 
@@ -23,7 +24,9 @@ module.exports = {
       compressor: {
         warnings: false
       }
-    })
+    }),
+    new CopyPlugin([{ from: './package.json', to: `${PATHS.dist}/package.json` } ], { ignore: [ '.*' ] }),
+
   ],
 
   target: 'node',

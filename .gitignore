@@ -20,7 +20,8 @@ node_modules/
 # Release #
 ######################
 data/
-public/
+build/
+.gradle/
 
 # Editors #
 ######################

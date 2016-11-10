@@ -42,6 +42,7 @@
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-stage-2": "^6.17.0",
+    "copy-webpack-plugin": "^4.0.0",
     "eslint": "^3.8.1",
     "eslint-config-unlease": "^3.0.2",
     "eslint-loader": "^1.6.0",
