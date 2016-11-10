@@ -5,7 +5,7 @@
 import { isDevelopment } from '../util'
 
 export const HOST = process.env.HOST || 'localhost'
-export const PORT = process.env.PORT || '5000'
+export const PORT = process.env.PORT || '8001'
 export const GRAPHQL_PATH = '/graphql'
 
 export const API_UNLEASE = isDevelopment ? 'http://local.unlease.io:9000' : 'https://www.unlease.io'
