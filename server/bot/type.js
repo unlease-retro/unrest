@@ -5,7 +5,8 @@ import { name } from './constants'
 const BotType = new GraphQLObjectType({
   name,
   fields: () => ({
-    bot: { type: GraphQLString },
+    _id: { type: GraphQLString },
+    url: { type: GraphQLString }
   })
 })
 
