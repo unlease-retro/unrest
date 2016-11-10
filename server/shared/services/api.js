@@ -5,19 +5,17 @@
 import fetch from 'node-fetch'
 import FormData from 'form-data'
 
-import { API } from '../constants'
-
 // -----
 // GET
 // -----
 
-export const get = (route, token) => fetch(`${API}/${route}`, { method: 'GET', headers: { 'Authorization': token } }).then( res => res.json() )
+export const get = (route, token) => fetch(route, { method: 'GET', headers: { 'Authorization': token } }).then( res => res.json() )
 
 // -----
 // POST
 // -----
 
-export const post = (route, data, token) => fetch(`${API}/${route}`, {
+export const post = (route, data, token) => fetch(route, {
   method: 'POST',
   headers: {
     'Accept': 'application/json',
@@ -37,7 +35,7 @@ export const postForm = (route, data, token) => {
 
   Object.keys(data).map( key => form.append(key, data[key]) )
 
-  return fetch(`${API}/${route}`, {
+  return fetch(route, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -52,7 +50,7 @@ export const postForm = (route, data, token) => {
 // PUT
 // -----
 
-export const put = (route, data, token) => fetch(`${API}/${route}`, {
+export const put = (route, data, token) => fetch(route, {
   method: 'PUT',
   headers: {
     'Accept': 'application/json',
