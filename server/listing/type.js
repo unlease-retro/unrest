@@ -16,6 +16,7 @@ const ListingType = new GraphQLObjectType({
     id: { type: GraphQLString },
     availableFrom: { type: GraphQLFloat },
     availableTo: { type: GraphQLFloat },
+    contactNumber: { type: GraphQLString },
     createdAt: { type: GraphQLFloat },
     leakage: { type: GraphQLBoolean },
     location: { type: GraphQLString },
