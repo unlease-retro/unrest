@@ -41,7 +41,7 @@ export const sendAdvertMessage = mutationWithClientMutationId({
     }
   },
 
-  mutateAndGetPayload: (input, { token }) => service.sendAdvertMessage(token, input).then(json => {
+  mutateAndGetPayload: (input, { token }) => service.sendBotMessage(token, input).then(json => {
 
     if (json.error) throw new Error(json.error)
 
