@@ -5,8 +5,8 @@ import Type from './type'
 import * as service from './service'
 
 
-export const updateAdvertStatus = mutationWithClientMutationId({
-  name: 'UpdateAdvertStatus',
+export const updateAdvert = mutationWithClientMutationId({
+  name: 'UpdateAdvert',
   inputFields: {
     id: { type: GraphQLString },
     disabled: { type: GraphQLBoolean }
@@ -17,7 +17,7 @@ export const updateAdvertStatus = mutationWithClientMutationId({
       resolve: payload => payload
     }
   },
-  mutateAndGetPayload: (input, { token }) => service.updateBotAdvert(token, input).then(json => {
+  mutateAndGetPayload: (input, { token }) => service.updateAdvert(token, input).then(json => {
 
     if (json.error) throw new Error(json.error)
 
@@ -29,8 +29,8 @@ export const updateAdvertStatus = mutationWithClientMutationId({
 })
 
 
-export const sendAdvertMessage = mutationWithClientMutationId({
-  name: 'SendAdvertMessage',
+export const sendMessage = mutationWithClientMutationId({
+  name: 'SendMessage',
   inputFields: {
     id: { type: GraphQLString }
   },
@@ -40,8 +40,7 @@ export const sendAdvertMessage = mutationWithClientMutationId({
       resolve: payload => payload
     }
   },
-
-  mutateAndGetPayload: (input, { token }) => service.sendBotMessage(token, input).then(json => {
+  mutateAndGetPayload: (input, { token }) => service.sendMessage(token, input).then(json => {
 
     if (json.error) throw new Error(json.error)
 

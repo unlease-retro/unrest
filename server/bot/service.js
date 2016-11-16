@@ -4,9 +4,11 @@ import { API_BOT } from '../shared/constants'
 import * as API from '../shared/services/api'
 
 
-export const getBotAdverts = (token, params) => API.get(`${API_BOT}/list/query?${queryString.stringify(params)}`, token)
+export const getAdverts = (token, params) => API.get(`${API_BOT}/list/query?${queryString.stringify(params)}`, token)
 
-export const updateBotAdvert = (token, params) => {
+export const getAdvert = (token, { id }) => API.get(`${API_BOT}/${id}`, token)
+
+export const updateAdvert = (token, params) => {
 
   const { id } = params
 
@@ -15,7 +17,7 @@ export const updateBotAdvert = (token, params) => {
 }
 
 // use this for reply page
-export const sendBotMessage = (token, { id }) => API.post(`${API_BOT}/send/${id}`, token)
+export const sendMessage = (token, { id }) => API.post(`${API_BOT}/send/${id}`, token)
 
 // send to selected adverts
-export const sendSelectedBotMessage = (token, params) => API.post(`${API_BOT}/send/all`, params, token)
+export const sendSelectedMessage = (token, params) => API.post(`${API_BOT}/send/all`, params, token)
