@@ -7,6 +7,7 @@ import * as service from './service'
 export const adverts = {
   type: new GraphQLList(Type),
   args: {
+    crawled: { type: GraphQLBoolean },
     submited: { type: GraphQLBoolean },
     disabled: { type: GraphQLBoolean }
   },

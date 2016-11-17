@@ -16,6 +16,8 @@ export const updateAdvert = (token, params) => {
 
 }
 
+export const getReplies = (token, phoneNumber) => API.get(`${API_BOT}/replies/${phoneNumber}`, token)
+
 // use this for reply page
 export const sendMessage = (token, { id }) => API.post(`${API_BOT}/send/${id}`, token)
 
