@@ -38,12 +38,22 @@ const AmenitiesType = new GraphQLObjectType({
   })
 })
 
+const LocationType = new GraphQLObjectType({
+  name: 'Location',
+  fields: () => ({
+    postcode: { type: GraphQLString },
+    area: { type: GraphQLString }
+  })
+})
+
 const ReplyType = new GraphQLObjectType({
   name: 'Reply',
   fields: () => ({
+    _id: { type: GraphQLString },
     from: { type: GraphQLString },
     thread: { type: GraphQLString },
-    message: { type: GraphQLString }
+    message: { type: GraphQLString },
+    createdAt: { type: GraphQLString }
   })
 })
 
@@ -54,10 +64,13 @@ const BotType = new GraphQLObjectType({
     url: { type: GraphQLString },
     title: { type: GraphQLString },
     price: { type: GraphQLString },
-    postcode: { type: GraphQLString },
     phoneNumber: { type: GraphQLString },
     disabled: { type: GraphQLBoolean },
     submited: { type: GraphQLBoolean },
+    location: {
+      type: LocationType,
+      resolve: advert => advert.location
+    },
     author: {
       type: AuthorType,
       resolve: advert => advert.author
