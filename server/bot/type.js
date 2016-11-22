@@ -49,7 +49,7 @@ const LocationType = new GraphQLObjectType({
 const ReplyType = new GraphQLObjectType({
   name: 'Reply',
   fields: () => ({
-    _id: { type: GraphQLString },
+    id: { type: GraphQLString },
     from: { type: GraphQLString },
     thread: { type: GraphQLString },
     message: { type: GraphQLString },
@@ -60,7 +60,7 @@ const ReplyType = new GraphQLObjectType({
 const BotType = new GraphQLObjectType({
   name,
   fields: () => ({
-    _id: { type: GraphQLString },
+    id: { type: GraphQLString },
     url: { type: GraphQLString },
     title: { type: GraphQLString },
     price: { type: GraphQLString },
