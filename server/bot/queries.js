@@ -4,10 +4,15 @@ import Type from './type'
 import * as service from './service'
 
 
+const searchArgs = {
+  submitted: { type: GraphQLBoolean },
+  disabled: { type: GraphQLBoolean }
+}
+
 export const adverts = {
   type: new GraphQLList(Type),
   args: {
-    submited: { type: GraphQLBoolean }
+    ...searchArgs
   },
   resolve: (root, args, { token }) => service.getAdverts(token, args)
 }
@@ -17,5 +22,5 @@ export const advertById = {
   args: {
     id: { type: GraphQLString }
   },
-  resolve: (root, args, { token }) => service.getAdvert(token, args)
+  resolve: (root, args, { token }) => service.advertById(token, args)
 }

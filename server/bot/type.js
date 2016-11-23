@@ -23,9 +23,9 @@ const PreferencesType = new GraphQLObjectType({
 const AvabilityType = new GraphQLObjectType({
   name: 'Avability',
   fields: () => ({
-    avability: { type: GraphQLString },
-    maximumTerm: { type: GraphQLString },
-    minimumTerm: { type: GraphQLString }
+    date: { type: GraphQLString },
+    maximum: { type: GraphQLString },
+    minimum: { type: GraphQLString }
   })
 })
 
@@ -50,7 +50,7 @@ const ReplyType = new GraphQLObjectType({
   name: 'Reply',
   fields: () => ({
     id: { type: GraphQLString },
-    from: { type: GraphQLString },
+    host: { type: GraphQLBoolean },
     thread: { type: GraphQLString },
     message: { type: GraphQLString },
     createdAt: { type: GraphQLString }
@@ -66,7 +66,7 @@ const BotType = new GraphQLObjectType({
     price: { type: GraphQLString },
     phoneNumber: { type: GraphQLString },
     disabled: { type: GraphQLBoolean },
-    submited: { type: GraphQLBoolean },
+    submitted: { type: GraphQLBoolean },
     location: {
       type: LocationType,
       resolve: advert => advert.location
@@ -87,7 +87,7 @@ const BotType = new GraphQLObjectType({
       type: AmenitiesType,
       resolve: advert => advert.amenities
     },
-    submitedBy: { type: GraphQLString },
+    submittedBy: { type: GraphQLString },
     createdAt: { type: GraphQLString },
     updatedAt: { type: GraphQLString },
     replies: {
