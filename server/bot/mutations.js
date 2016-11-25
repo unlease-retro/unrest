@@ -1,79 +1,106 @@
-import { GraphQLBoolean, GraphQLString } from 'graphql'
+import { GraphQLList, GraphQLBoolean, GraphQLString } from 'graphql'
 import { mutationWithClientMutationId } from 'graphql-relay'
 
 import Type from './type'
 import * as service from './service'
 
 
-export const updateAdvertStatus = mutationWithClientMutationId({
-  name: 'UpdateAdvertStatus',
+export const disableAdvert = mutationWithClientMutationId({
+  name: 'DisableAdvert',
+
   inputFields: {
-    id: { type: GraphQLString },
-    disabled: { type: GraphQLBoolean },
-    submited: { type: GraphQLBoolean }
+    id: { type: GraphQLString }
   },
+
   outputFields: {
     advert: {
       type: Type,
       resolve: payload => payload
     }
   },
-  mutateAndGetPayload: (input, { token }) => service.updateAdvert(token, input).then(json => {
+
+  mutateAndGetPayload: (input, { token }) => service.disableAdvert(token, input).then(json => {
 
     if (json.error) throw new Error(json.error)
 
-    const { advert } = json
-
-    return advert
+    return json.advert
 
   })
+
 })
 
 
-export const sendMessage = mutationWithClientMutationId({
-  name: 'SendMessage',
+export const markAdvert = mutationWithClientMutationId({
+  name: 'MarkAdvert',
+
+  inputFields: {
+    id: { type: GraphQLString }
+  },
+
+  outputFields: {
+    advert: {
+      type: Type,
+      resolve: payload => payload
+    }
+  },
+
+  mutateAndGetPayload: (input, { token }) => service.markAdvert(token, input).then(json => {
+
+    if (json.error) throw new Error(json.error)
+
+    return json.advert
+
+  })
+
+})
+
+
+export const sendAdvertMessage = mutationWithClientMutationId({
+  name: 'SendAdvertMessage',
+
   inputFields: {
     id: { type: GraphQLString },
     message: { type: GraphQLString }
   },
+
   outputFields: {
     advert: {
       type: Type,
       resolve: payload => payload
     }
   },
-  mutateAndGetPayload: (input, { token }) => service.sendMessage(token, input).then(json => {
 
-    if (json.error) throw new Error(json.error)
+  mutateAndGetPayload: (input, { token }) => service.sendAdvertMessage(token, input).then(json => {
 
-    const { advert } = json
+    if (json.error) thorw new Error(json.error)
 
-    return advert
+    return json.advert
 
   })
 
 })
 
 
-export const sendSelectedMessage = mutationWithClientMutationId({
-  name: 'SendSelectedMessage',
+export const sendAdvertsMessages = mutationWithClientMutationId({
+  name: 'SendAdvertsMessages',
+  
   inputFields: {
     adverts: { type: GraphQLString },
-    message: { type: GraphQLString }
+    message: { type: GraphQLString },
   },
+
   outputFields: {
     advert: {
-      type: Type,
+      type: new GraphQLList(Type),
       resolve: payload => payload
     }
   },
-  mutateAndGetPayload: (input, { token }) => service.sendSelectedMessage(token, input).then(json => {
+
+  mutateAndGetPayload: (input, { token }) => service.sendAdvertsMessages(token, input).then(json => {
 
     if (json.error) throw new Error(json.error)
 
-    const { advert } = json
-
-    return advert
+    return json
 
   })
 })

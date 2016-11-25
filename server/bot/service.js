@@ -8,24 +8,12 @@ export const getAdverts = (token, params) => API.get(`${API_BOT}/list/query?${qu
 
 export const advertById = (token, { id }) => API.get(`${API_BOT}/${id}`, token)
 
-export const updateAdvert = (token, params) => {
-
-  const { id } = params
-
-  return API.put(`${API_BOT}/${id}`, params, token)
-
-}
-
 export const getReplies = (token, phoneNumber) => API.get(`${API_BOT}/replies/${phoneNumber}`, token)
 
-// use this for reply page
-export const sendMessage = (token, params) => {
+export const sendAdvertsMessages = (token, params) => API.post(`${API_BOT}/send/all`, params, token)
 
-  const { id } = params
+export const sendAdvertMessage = (token, params) => API.post(`${API_BOT}/send/${params.id}`, params, token)
 
-  return API.post(`${API_BOT}/send/${id}`, params, token)
+export const disableAdvert = (token, { id }) => API.post(`${API_BOT}/disable/${id}`, {}, token)
 
-}
-
-// send to selected adverts
-export const sendSelectedMessage = (token, params) => API.post(`${API_BOT}/send/all`, params, token)
+export const markAdvert = (token, { id }) => API.post(`${API_BOT}/mark/${id}`, {}, token)
