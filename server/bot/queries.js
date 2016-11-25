@@ -1,12 +1,26 @@
-import { GraphQLString } from 'graphql'
+import { GraphQLList, GraphQLString, GraphQLBoolean } from 'graphql'
 
 import Type from './type'
 import * as service from './service'
 
-export const botSample = {
+
+const searchArgs = {
+  submitted: { type: GraphQLBoolean },
+  disabled: { type: GraphQLBoolean }
+}
+
+export const adverts = {
+  type: new GraphQLList(Type),
+  args: {
+    ...searchArgs
+  },
+  resolve: (root, args, { token }) => service.getAdverts(token, args)
+}
+
+export const advertById = {
   type: Type,
   args: {
-    token: { type: GraphQLString },
+    id: { type: GraphQLString }
   },
-  resolve: (root, { token }) => service.getBotSample(token)
+  resolve: (root, args, { token }) => service.advertById(token, args)
 }
