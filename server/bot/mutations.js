@@ -1,4 +1,4 @@
-import { GraphQLList, GraphQLBoolean, GraphQLString } from 'graphql'
+import { GraphQLList, GraphQLString } from 'graphql'
 import { mutationWithClientMutationId } from 'graphql-relay'
 
 import Type from './type'
@@ -72,7 +72,7 @@ export const sendAdvertMessage = mutationWithClientMutationId({
 
   mutateAndGetPayload: (input, { token }) => service.sendAdvertMessage(token, input).then(json => {
 
-    if (json.error) thorw new Error(json.error)
+    if (json.error) throw new Error(json.error)
 
     return json.advert
 
