@@ -8,7 +8,7 @@ export const getAdverts = (token, params) => API.get(`${API_BOT}/list/query?${qu
 
 export const advertById = (token, { id }) => API.get(`${API_BOT}/${id}`, token)
 
-export const getReplies = (token, phoneNumber) => API.get(`${API_BOT}/replies/${phoneNumber}`, token)
+export const getAdvertReplies = (token, phoneNumber) => API.get(`${API_BOT}/replies/${phoneNumber}`, token)
 
 export const sendAdvertsMessages = (token, params) => API.post(`${API_BOT}/send/all`, params, token)
 
