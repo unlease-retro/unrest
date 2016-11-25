@@ -14,6 +14,6 @@ export const sendAdvertsMessages = (token, params) => API.post(`${API_BOT}/send/
 
 export const sendAdvertMessage = (token, params) => API.post(`${API_BOT}/send/${params.id}`, params, token)
 
-export const disableAdvert = (token, { id }) => API.post(`${API_BOT}/disable/${id}`, {}, token)
+export const disableAdvert = (token, { id }) => API.put(`${API_BOT}/disable/${id}`, {}, token)
 
 export const markAdvert = (token, { id }) => API.post(`${API_BOT}/mark/${id}`, {}, token)
