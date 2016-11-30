@@ -93,6 +93,7 @@ const BotType = new GraphQLObjectType({
     submittedBy: { type: GraphQLString },
     createdAt: { type: GraphQLString },
     updatedAt: { type: GraphQLString },
+    recivedMessage: { type: GraphQLBoolean },
 
     price: {
       type: PriceType,
