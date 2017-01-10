@@ -29,3 +29,53 @@ export const updateHostStatus = mutationWithClientMutationId({
 
   })
 })
+
+export const addListingToPopular = mutationWithClientMutationId({
+  name: 'AddListingToPopular',
+  inputFields: {
+    id: { type: GraphQLString }
+  },
+  outputFields: {
+    listing: {
+      type: Type,
+      resolve: payload => payload
+    }
+  },
+  mutateAndGetPayload: (input, { token }) => service.addListingToPopular(token, input).then( json => {
+    
+    if (json.error) throw new Error(json.error)
+
+    const { id, popular } = json
+    
+    return {
+      id, popular
+    }
+
+  })
+})
+
+export const removeListingFromPopular = mutationWithClientMutationId({
+  name: 'RemoveListingFromPopular',
+  inputFields: {
+    id: { type: GraphQLString }
+  },
+  outputFields: {
+    listing: {
+      type: Type,
+      resolve: payload => payload
+    }
+  },
+  mutateAndGetPayload: (input, { token }) => service.removeListingFromPopular(token, input).then( json => {
+
+    if (json.error) throw new Error(json.error)
+
+    const { id, popular } = json
+
+    return {
+      id, popular
+    }
+
+  })
+})
+
+

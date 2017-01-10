@@ -24,6 +24,7 @@ const ListingType = new GraphQLObjectType({
     postcode: { type: GraphQLString },
     title: { type: GraphQLString },
     weeklyRent: { type: GraphQLInt },
+    popular: { type: GraphQLBoolean },
     photos: {
       type: new GraphQLList(PhotoType),
       resolve: listing => listing.imageList
