@@ -59,3 +59,13 @@ export const put = (route, data, token) => fetch(route, {
   },
   body: JSON.stringify(data),
 }).then( res => res.json() )
+
+
+export const remove = (route, token) => fetch(route, {
+  method: 'DELETE',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': token
+  }
+}).then( res => res.json() )
