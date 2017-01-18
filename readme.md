@@ -5,24 +5,24 @@
 ## Setup
 
 ```
-npm i
+yarn
 ```
 
 ## Develop
 
 ```
-npm start
+yarn start
 ```
 
 ## Release
 
 ```
-npm run build
+yarn run build
 ```
 
 ## Generate schema
 
 * Generate `data/schema.json` for `babel-relay-plugin`
 ```
-npm run schema
+yarn run schema
 ```
