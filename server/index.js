@@ -4,14 +4,20 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import graphqlHTTP from 'express-graphql'
 
+import routes from './routes'
+import connectors from './shared/connectors'
+import schema from './shared/schema'
 import { isDevelopment } from './shared/util'
 import { HOST, PORT, API_PATH, GRAPHQL_PATH, ERROR_CODES } from './shared/constants'
 
-import schema from './shared/schema'
-import routes from './routes'
-
 // all aboard the App Express 🚂
 const app = express()
+
+// prepare app `locals` to attach database connectors
+app.locals.db = {}
+
+// attach database connectors to app `locals`
+Promise.all(connectors).then( dbs => dbs.map( db => app.locals.db[db.databaseName] = db ), err => console.error(err.stack) )
 
 // parser
 app.use(bodyParser.json())
@@ -27,7 +33,7 @@ app.options(GRAPHQL_PATH, cors())
 const formatError = ({ message, locations, stack }) => ({ code: ERROR_CODES[message], message, locations, stack })
 
 // declare graphqlSettings up front rather than every request to prevent unnecessary garbage collection
-const graphqlSettings = req => ({ schema, graphiql: isDevelopment, pretty: isDevelopment, context: { token: req.headers.authorization }, formatError })
+const graphqlSettings = req => ({ schema, graphiql: isDevelopment, pretty: isDevelopment, context: { db: req.app.locals.db, token: req.headers.authorization }, formatError })
 
 // GraphQL server route
 app.use(GRAPHQL_PATH, graphqlHTTP(graphqlSettings))
