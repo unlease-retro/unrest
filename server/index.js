@@ -5,7 +5,7 @@ import cors from 'cors'
 import graphqlHTTP from 'express-graphql'
 
 import { isDevelopment } from './shared/util'
-import { HOST, PORT, GRAPHQL_PATH, ERROR_CODES } from './shared/constants'
+import { HOST, PORT, API_PATH, GRAPHQL_PATH, ERROR_CODES } from './shared/constants'
 
 import schema from './shared/schema'
 import routes from './routes'
@@ -33,7 +33,7 @@ const graphqlSettings = req => ({ schema, graphiql: isDevelopment, pretty: isDev
 app.use(GRAPHQL_PATH, graphqlHTTP(graphqlSettings))
 
 // API routes
-app.use('/api', routes)
+app.use(API_PATH, routes)
 
 /* eslint-disable no-unused-vars */
 // error handling

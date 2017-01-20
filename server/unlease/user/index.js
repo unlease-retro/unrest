@@ -1,4 +1,4 @@
-// import Mutations from './mutations'
+// import mutations from './mutations'
 import * as queries from './queries'
 import * as service from './service'
 import Type from './type'

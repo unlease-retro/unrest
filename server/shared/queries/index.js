@@ -1,11 +1,7 @@
 import * as Bot from '../../bot'
-import * as Listing from '../../listing'
-import * as Notification from '../../notification'
-import * as User from '../../user'
+import * as Unlease from '../../unlease'
 
 export default {
   ...Bot.queries,
-  ...Listing.queries,
-  ...Notification.queries,
-  ...User.queries,
+  ...Unlease.queries,
 }

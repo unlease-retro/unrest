@@ -60,6 +60,9 @@ export const put = (route, data, token) => fetch(route, {
   body: JSON.stringify(data),
 }).then( res => res.json() )
 
+// -----
+// DELETE
+// -----
 
 export const remove = (route, token) => fetch(route, {
   method: 'DELETE',
