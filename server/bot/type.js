@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLBoolean } from 'graphql'
 
-import { typeName, typeNames } from './constants'
+import { typeName, typeNames, dbname } from './constants'
 import * as service from './service'
 
 
@@ -105,7 +105,7 @@ const BotType = new GraphQLObjectType({
     },
     replies: {
       type: new GraphQLList(ReplyType),
-      resolve: (advert, args, { token }) => service.getAdvertReplies(token, advert.phoneNumber)
+      resolve: ({ phoneNumber }, args, { db }) => service.allReplies(phoneNumber, db[dbname])
     },
   }
 

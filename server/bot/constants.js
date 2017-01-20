@@ -14,7 +14,9 @@ export const typeNames = {
   PREFERENCES: 'Preferences',
 }
 
-export const collection = 'adverts'
+export const adverts = 'adverts'
+
+export const replies = 'replies'
 
 export const dbname = isDevelopment ? 'optimus' : 'bot_prod'
 
