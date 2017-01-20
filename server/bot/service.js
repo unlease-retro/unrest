@@ -1,19 +1,12 @@
-import queryString from 'query-string'
+import { ObjectID } from 'mongodb'
+import { adverts, replies } from './constants'
 
-import { API_BOT } from '../shared/constants'
-import * as API from '../shared/services/api'
+export const allAdverts = (params, db) => db.collection( adverts ).find( params ).toArray()
 
+export const advert = ({ id }, db) => db.collection( adverts ).findOne( { id: ObjectID( id ) } )
 
-export const getAdverts = (token, params) => API.get(`${API_BOT}/list/query?${queryString.stringify(params)}`, token)
+export const updateAdvert = ({ id, payload }, db) => db.collection( adverts ).findOneAndUpdate({ id: ObjectID(id) }, { $set: { ...payload } }, { returnOriginal: false })
 
-export const advertById = (token, { id }) => API.get(`${API_BOT}/${id}`, token)
+export const createAdvert = ({ payload }, db) => db.collection( adverts ).insert( payload )
 
-export const getAdvertReplies = (token, phoneNumber) => API.get(`${API_BOT}/replies/${phoneNumber}`, token)
-
-export const sendAdvertsMessages = (token, params) => API.post(`${API_BOT}/send/all`, params, token)
-
-export const sendAdvertMessage = (token, params) => API.post(`${API_BOT}/send/${params.id}`, params, token)
-
-export const disableAdvert = (token, { id }) => API.put(`${API_BOT}/disable/${id}`, {}, token)
-
-export const markAdvert = (token, { id }) => API.put(`${API_BOT}/mark/${id}`, {}, token)
+export const allReplies = (thread, db) => db.collection( replies ).find( { thread } ).toArray()

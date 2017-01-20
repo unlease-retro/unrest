@@ -1,66 +1,22 @@
-import { GraphQLList, GraphQLString } from 'graphql'
+/* eslint-disable no-unused-vars */
+import { GraphQLString, } from 'graphql'
 import { mutationWithClientMutationId } from 'graphql-relay'
 
 import Type from './type'
+import InputType from './inputType'
+
+import { dbname } from './constants'
 import * as service from './service'
 
 
-export const disableAdvert = mutationWithClientMutationId({
-  name: 'DisableAdvert',
-
-  inputFields: {
-    id: { type: GraphQLString }
-  },
-
-  outputFields: {
-    advert: {
-      type: Type,
-      resolve: payload => payload
-    }
-  },
-
-  mutateAndGetPayload: (input, { token }) => service.disableAdvert(token, input).then(json => {
-
-    if (json.error) throw new Error(json.error)
-
-    return json.advert
-
-  })
-
-})
-
-
-export const markAdvert = mutationWithClientMutationId({
-  name: 'MarkAdvert',
-
-  inputFields: {
-    id: { type: GraphQLString }
-  },
-
-  outputFields: {
-    advert: {
-      type: Type,
-      resolve: payload => payload
-    }
-  },
-
-  mutateAndGetPayload: (input, { token }) => service.markAdvert(token, input).then(json => {
-
-    if (json.error) throw new Error(json.error)
-
-    return json.advert
-
-  })
-
-})
-
-
-export const sendAdvertMessage = mutationWithClientMutationId({
-  name: 'SendAdvertMessage',
+export const updateAdvert = mutationWithClientMutationId({
+  name: 'UpdateAdvert',
 
   inputFields: {
     id: { type: GraphQLString },
-    message: { type: GraphQLString }
+    payload: {
+      type: InputType
+    }
   },
 
   outputFields: {
@@ -70,37 +26,40 @@ export const sendAdvertMessage = mutationWithClientMutationId({
     }
   },
 
-  mutateAndGetPayload: (input, { token }) => service.sendAdvertMessage(token, input).then(json => {
+  mutateAndGetPayload: (input, { db }) => service.updateAdvert(input, db[dbname]).then(json => {
 
     if (json.error) throw new Error(json.error)
 
-    return json.advert
+    return json.value
 
   })
 
 })
 
 
-export const sendAdvertsMessages = mutationWithClientMutationId({
-  name: 'SendAdvertsMessages',
-  
+export const createAdverts = mutationWithClientMutationId({
+  name: 'CreateAdvert',
+
   inputFields: {
-    adverts: { type: GraphQLString },
-    message: { type: GraphQLString },
+    payload: {
+      type: InputType
+    }
   },
 
   outputFields: {
     advert: {
-      type: new GraphQLList(Type),
+      type: Type,
       resolve: payload => payload
     }
   },
 
-  mutateAndGetPayload: (input, { token }) => service.sendAdvertsMessages(token, input).then(json => {
+  mutateAndGetPayload: (input, { db }) => service.createAdvert(input, db[dbname]).then(json => {
 
     if (json.error) throw new Error(json.error)
 
-    return json
+    // json.ops.shift()
+    return json.ops[0]
 
   })
+
 })

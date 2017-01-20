@@ -66,6 +66,6 @@
     "mongodb": "^2.2.21",
     "node-fetch": "^1.6.3",
     "per-env": "^1.0.2",
-    "query-string": "^4.2.3"
+    "query-string": "^4.3.1"
   }
 }
