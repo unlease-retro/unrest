@@ -37,7 +37,7 @@ export const updateAdvert = mutationWithClientMutationId({
 })
 
 
-export const createAdverts = mutationWithClientMutationId({
+export const createAdvert = mutationWithClientMutationId({
   name: 'CreateAdvert',
 
   inputFields: {
