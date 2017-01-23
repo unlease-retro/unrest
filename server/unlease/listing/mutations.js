@@ -1,7 +1,7 @@
 import { GraphQLBoolean, GraphQLString } from 'graphql'
 import { mutationWithClientMutationId } from 'graphql-relay'
 
-import InputType from './inputType'
+import InputType, { UserWithListingInputType } from './inputType'
 import Type from './type'
 import * as service from './service'
 
@@ -17,6 +17,28 @@ export const createListing = mutationWithClientMutationId({
     }
   },
   mutateAndGetPayload: ({ payload }, { token }) => service.createListing(token, payload).then( json => {
+
+    if (json.error) throw new Error(json.error)
+
+    const { id } = json
+
+    return { id }
+
+  })
+})
+
+export const createUserWithListing = mutationWithClientMutationId({
+  name: 'CreateUserWithListing',
+  inputFields: {
+    payload: { type: UserWithListingInputType },
+  },
+  outputFields: {
+    listing: {
+      type: Type,
+      resolve: payload => payload
+    }
+  },
+  mutateAndGetPayload: ({ payload }, { token }) => service.createUserWithListing(token, payload).then( json => {
 
     if (json.error) throw new Error(json.error)
 

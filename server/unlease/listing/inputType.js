@@ -1,6 +1,7 @@
 import { GraphQLBoolean, GraphQLFloat, GraphQLInputObjectType, GraphQLInt, GraphQLList, GraphQLString } from 'graphql'
 
 import { name, TYPE_NAMES } from './constants'
+import { inputType as UserInputType } from '../user'
 
 const GeolocationInputType = new GraphQLInputObjectType({
   name: `${TYPE_NAMES.geolocation}InputType`,
@@ -136,6 +137,14 @@ const ListingInputType = new GraphQLInputObjectType({
     referralCode: { type: GraphQLString },
     roommate: { type: RoommateInputType },
     roomType: { type: GraphQLString },
+  }
+})
+
+export const UserWithListingInputType = new GraphQLInputObjectType({
+  name: 'UserWithListingInputType',
+  fields: {
+    listing: { type: ListingInputType },
+    user: { type: UserInputType },
   }
 })
 
