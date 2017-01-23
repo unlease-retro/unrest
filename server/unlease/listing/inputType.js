@@ -88,9 +88,9 @@ const PhotoInputType = new GraphQLInputObjectType({
   name: `${TYPE_NAMES.photo}InputType`,
   fields: {
     imageList: { type: new GraphQLList(ImageInputType) },
-    lowerLimit: { type: GraphQLInt },
+    lowerLimit: { type: GraphQLInt, defaultValue: 1 },
     sectionCompleted: { type: GraphQLBoolean },
-    upperLimit: { type: GraphQLInt },
+    upperLimit: { type: GraphQLInt, defaultValue: 9 },
   }
 })
 
