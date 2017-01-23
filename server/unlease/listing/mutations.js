@@ -1,8 +1,31 @@
 import { GraphQLBoolean, GraphQLString } from 'graphql'
 import { mutationWithClientMutationId } from 'graphql-relay'
 
+import InputType from './inputType'
 import Type from './type'
 import * as service from './service'
+
+export const createListing = mutationWithClientMutationId({
+  name: 'CreateListing',
+  inputFields: {
+    payload: { type: InputType },
+  },
+  outputFields: {
+    listing: {
+      type: Type,
+      resolve: payload => payload
+    }
+  },
+  mutateAndGetPayload: ({ payload }, { token }) => service.createListing(token, payload).then( json => {
+
+    if (json.error) throw new Error(json.error)
+
+    const { id } = json
+
+    return { id }
+
+  })
+})
 
 export const updateHostStatus = mutationWithClientMutationId({
   name: 'UpdateHostStatus',
@@ -23,9 +46,7 @@ export const updateHostStatus = mutationWithClientMutationId({
 
     const { id, nonResponsive, leakage } = json
 
-    return {
-      id, nonResponsive, leakage
-    }
+    return { id, nonResponsive, leakage }
 
   })
 })
@@ -42,14 +63,12 @@ export const addListingToPopular = mutationWithClientMutationId({
     }
   },
   mutateAndGetPayload: (input, { token }) => service.addListingToPopular(token, input).then( json => {
-    
+
     if (json.error) throw new Error(json.error)
 
     const { id, popular } = json
-    
-    return {
-      id, popular
-    }
+
+    return { id, popular }
 
   })
 })
@@ -71,11 +90,7 @@ export const removeListingFromPopular = mutationWithClientMutationId({
 
     const { id, popular } = json
 
-    return {
-      id, popular
-    }
+    return { id, popular }
 
   })
 })
-
-
