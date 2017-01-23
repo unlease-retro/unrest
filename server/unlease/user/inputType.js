@@ -2,7 +2,7 @@ import { GraphQLString, GraphQLInputObjectType } from 'graphql'
 import { name } from './constants'
 
 const UserInputType = new GraphQLInputObjectType({
-  name: `InputType${name}`,
+  name: `${name}InputType`,
   fields: {
     id: { type: GraphQLString },
     firstName: { type: GraphQLString },
