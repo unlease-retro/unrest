@@ -4,6 +4,7 @@ import * as User from './user'
 
 export const mutations = {
   ...Listing.mutations,
+  ...User.mutations,
 }
 
 export const queries = {
