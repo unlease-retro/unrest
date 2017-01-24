@@ -58,16 +58,6 @@ const DescriptionInputType = new GraphQLInputObjectType({
   }
 })
 
-const EmbeddedUserInputType = new GraphQLInputObjectType({
-  name: `${TYPE_NAMES.embeddedUser}InputType`,
-  fields: {
-    avatar: { type: GraphQLString },
-    firstName: { type: GraphQLString },
-    lastName: { type: GraphQLString },
-    id: { type: GraphQLString },
-  }
-})
-
 const HomeTruthInputType = new GraphQLInputObjectType({
   name: `${TYPE_NAMES.homeTruth}InputType`,
   fields: {
@@ -127,7 +117,6 @@ const ListingInputType = new GraphQLInputObjectType({
     booked: { type: GraphQLBoolean },
     completed: { type: GraphQLBoolean },
     description: { type: DescriptionInputType },
-    embeddedUser: { type: EmbeddedUserInputType },
     homeTruth: { type: HomeTruthInputType },
     homeType: { type: GraphQLString },
     listed: { type: GraphQLBoolean },
