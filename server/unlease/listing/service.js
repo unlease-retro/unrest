@@ -12,6 +12,8 @@ export const createListing = (token, data) => API.post(`${API_UNLEASE}/resource/
 
 export const updateListing = (token, data) => API.put(`${API_UNLEASE}/resource/listing`, data, token)
 
+export const createBotListing = (token, data) => API.post(`${API_UNLEASE}/resource/botListing`, data, token)
+
 export const uploadImages = (listingId, images) => {
 
   let promises = []
@@ -34,6 +36,7 @@ export const createUserWithListing = (token, { listing, user}) => {
   return UserService.createUser(token, user)
     .then( () => createListing(token, listing) )
     .then( listing => uploadImages(listing.id, imageList).then( imageList => updateListing(token, { ...listing, photo: { imageList: imageList.map( ({ s3Link }) => ({ s3Link, name: `${IMAGE_NAME}-${uuid.v4()}${path.extname(s3Link)}` })) } }) ) )
+    .then( listing => createBotListing(token, { listingId: listing.id }))
 
 }
 
