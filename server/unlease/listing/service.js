@@ -1,12 +1,41 @@
+import path from 'path'
 import queryString from 'query-string'
+import request from 'request-promise'
+import uuid from 'node-uuid'
 
+import { IMAGE_NAME } from './constants'
 import { API_UNLEASE } from '../../shared/constants'
 import * as API from '../../shared/services/api'
 import { service as UserService } from '../user'
 
 export const createListing = (token, data) => API.post(`${API_UNLEASE}/resource/listing`, data, token)
 
-export const createUserWithListing = (token, { listing, user}) => UserService.createUser(token, user).then( () => createListing(token, listing) )
+export const updateListing = (token, data) => API.put(`${API_UNLEASE}/resource/listing`, data, token)
+
+export const uploadImages = (listingId, images) => {
+
+  let promises = []
+
+  images.map( ({ s3Link }) => promises.push(request.post({
+    json: true,
+    uri: `${API_UNLEASE}/image-process/image/upload`,
+    formData: { listingId, filename: `${IMAGE_NAME}-${uuid.v4()}${path.extname(s3Link)}`, image: request(s3Link) }
+  })) )
+
+  return Promise.all(promises)
+
+}
+
+export const createUserWithListing = (token, { listing, user}) => {
+
+  // extract image list from listing
+  const { photo: { imageList } } = listing
+
+  return UserService.createUser(token, user)
+    .then( () => createListing(token, listing) )
+    .then( listing => uploadImages(listing.id, imageList).then( imageList => updateListing(token, { ...listing, photo: { imageList: imageList.map( ({ s3Link }) => ({ s3Link, name: `${IMAGE_NAME}-${uuid.v4()}${path.extname(s3Link)}` })) } }) ) )
+
+}
 
 export const fetchListings = (token, params) => API.get(`${API_UNLEASE}/resource/listing/query?${queryString.stringify(params)}`, token)
 

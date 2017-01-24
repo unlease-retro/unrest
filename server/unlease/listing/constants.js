@@ -13,3 +13,5 @@ export const TYPE_NAMES = {
   pricing: 'Pricing',
   roommate: 'Roommate',
 }
+
+export const IMAGE_NAME = 'listing-image'
