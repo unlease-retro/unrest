@@ -13,9 +13,24 @@ export const notify = (req, res, next) => {
 
 }
 
-export const sms = (req, res, next) => {
+export const receiveSms = (req, res, next) => {
 
-  return Webhooks.sms(req.body)
+  const { body, from } = req.body
+
+  return Webhooks.notify({ text: `SMS received from ${from}: ${body}` })
+    .then( (res) => {
+
+      res.status(200).json({})
+
+      return next()
+
+    }, e => next(e) )
+
+}
+
+export const sendSms = (req, res, next) => {
+
+  return Webhooks.sendSms(req.body)
     .then( () => {
 
       res.status(200).json({})
