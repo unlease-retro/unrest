@@ -69,7 +69,7 @@ const PriceType = new GraphQLObjectType({
 const BotType = new GraphQLObjectType({
   name: typeName,
   fields: {
-    id: { type: GraphQLString },
+    _id: { type: GraphQLString },
     url: { type: GraphQLString },
     title: { type: GraphQLString },
     phoneNumber: { type: GraphQLString },

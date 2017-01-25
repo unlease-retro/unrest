@@ -13,7 +13,7 @@ export const updateAdvert = mutationWithClientMutationId({
   name: 'UpdateAdvert',
 
   inputFields: {
-    id: { type: GraphQLString },
+    _id: { type: GraphQLString },
     payload: {
       type: InputType
     }

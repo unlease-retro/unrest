@@ -56,7 +56,7 @@ const PreferencesType = new GraphQLInputObjectType({
 const BotInputType = new GraphQLInputObjectType({
   name: inputTypeName,
   fields: {
-    id: { type: GraphQLString },
+    _id: { type: GraphQLString },
     price: { type: PriceType },
     author: { type: AuthorType },
     url: { type: GraphQLString },
