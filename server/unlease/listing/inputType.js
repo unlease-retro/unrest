@@ -28,7 +28,7 @@ const AddressInputType = new GraphQLInputObjectType({
 })
 
 const AmenityInputType = new GraphQLInputObjectType({
-  name: `${TYPE_NAMES.Amenity}InputType`,
+  name: `${TYPE_NAMES.amenity}InputType`,
   fields: {
     displayName: { type: GraphQLString },
     included: { type: GraphQLBoolean },
