@@ -6,12 +6,10 @@ export const inputTypeName = 'InputTypeBot'
 
 export const typeNames = {
   REPLY: 'Reply',
-  PRICE: 'Price',
-  AUTHOR: 'Author',
-  LOCATION: 'Location',
   AMENITIES: 'Amenities',
-  AVABILITY: 'Avability',
   PREFERENCES: 'Preferences',
+  HOUSEHOLD: 'Household',
+  EXTRA_COSTS: 'ExtraCosts'
 }
 
 export const adverts = 'adverts'

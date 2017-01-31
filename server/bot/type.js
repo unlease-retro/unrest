@@ -1,50 +1,65 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLBoolean } from 'graphql'
+import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLBoolean } from 'graphql'
 
 import { typeName, typeNames, dbname } from './constants'
 import * as service from './service'
 
-
-const AuthorType = new GraphQLObjectType({
-  name: `${typeName}${typeNames.AUTHOR}`,
+const HouseholdType = new GraphQLObjectType({
+  name: `${typeName}${typeNames.HOUSEHOLD}`,
   fields: {
-    name: { type: GraphQLString },
-    type: { type: GraphQLString }
+    pets: { type: GraphQLString },
+    rooms: { type: GraphQLString },
+    gender: { type: GraphQLString },
+    smoker: { type: GraphQLString },
+    language: { type: GraphQLString },
+    flatmates: { type: GraphQLString },
+    occupation: { type: GraphQLString }
+  }
+})
+
+const ExtraCostsType = new GraphQLObjectType({
+  name: `${typeName}${typeNames.EXTRA_COSTS}`,
+  fields: {
+    deposit: { type: GraphQLString },
+    feesApply: { type: GraphQLString },
+    billsIncluded: { type: GraphQLString }
   }
 })
 
 const PreferencesType = new GraphQLObjectType({
   name: `${typeName}${typeNames.PREFERENCES}`,
   fields: {
+    dss: { type: GraphQLString },
+    pets: { type: GraphQLString },
+    gender: { type: GraphQLString },
     couples: { type: GraphQLString },
-    gender: { type: GraphQLString }
-  }
-})
-
-const AvabilityType = new GraphQLObjectType({
-  name: `${typeName}${typeNames.AVABILITY}`,
-  fields: {
-    date: { type: GraphQLString },
-    maximum: { type: GraphQLString },
-    minimum: { type: GraphQLString }
+    smoking: { type: GraphQLString },
+    occupation: { type: GraphQLString },
+    references: { type: GraphQLString }
   }
 })
 
 const AmenitiesType = new GraphQLObjectType({
   name: `${typeName}${typeNames.AMENITIES}`,
   fields: {
-    balcony: { type: GraphQLString },
+    parking: { type: GraphQLString },
+    garage: { type: GraphQLString },
+    furnishing: { type: GraphQLString },
     garden: { type: GraphQLString },
-    parking: { type: GraphQLString }
+    balcony: { type: GraphQLString },
+    disabledAccess: { type: GraphQLString },
+    sharedLivingRoom: { type: GraphQLString },
+    broadband: { type: GraphQLString }
   }
 })
 
-const LocationType = new GraphQLObjectType({
-  name: `${typeName}${typeNames.LOCATION}`,
+const GeocodeType = new GraphQLObjectType({
+  name: `${typeName}${typeNames.GEOCODE}`,
   fields: {
-    postcode: { type: GraphQLString },
-    area: { type: GraphQLString }
+    lat: { type: GraphQLInt },
+    lng: { type: GraphQLInt }
   }
 })
+
 
 const ReplyType = new GraphQLObjectType({
   name: `${typeName}${typeNames.REPLY}`,
@@ -57,52 +72,41 @@ const ReplyType = new GraphQLObjectType({
   }
 })
 
-const PriceType = new GraphQLObjectType({
-  name: `${typeName}${typeNames.PRICE}`,
-  fields: {
-    unit: { type: GraphQLString },
-    value: { type: GraphQLString }
-  }
-})
-
-
 const BotType = new GraphQLObjectType({
   name: typeName,
   fields: {
     _id: { type: GraphQLString },
-    url: { type: GraphQLString },
+    hostName: { type: GraphQLString },
     title: { type: GraphQLString },
-    phoneNumber: { type: GraphQLString },
+    description: { type: GraphQLString },
+    price: { type: GraphQLInt },
+    photos: { type: new GraphQLList(GraphQLString) },
+    availabilityFrom: { type: GraphQLString },
+    availabilityTo: { type: GraphQLString },
+    postcode: { type: GraphQLString },
+    city: { type: GraphQLString },
     disabled: { type: GraphQLBoolean },
     submitted: { type: GraphQLBoolean },
-    submittedBy: { type: GraphQLString },
-    createdAt: { type: GraphQLString },
-    updatedAt: { type: GraphQLString },
-    receivedMessage: { type: GraphQLBoolean },
-    price: {
-      type: PriceType,
-      resolve: advert => advert.price
-    },
-    location: {
-      type: LocationType,
-      resolve: advert => advert.location
-    },
-    author: {
-      type: AuthorType,
-      resolve: advert => advert.author
+    amenities: {
+      type: AmenitiesType,
+      resolve: advert => advert.amenities
     },
     preferences: {
       type: PreferencesType,
       resolve: advert => advert.preferences
     },
-    avability: {
-      type: AvabilityType,
-      resolve: advert => advert.avability
+    household: {
+      type: HouseholdType,
+      resolve: advert => advert.household
     },
-    amenities: {
-      type: AmenitiesType,
-      resolve: advert => advert.amenities
+    extraCosts: {
+      type: ExtraCostsType,
+      resolve: advert => advert.extraCosts
     },
+    geocode: {
+      type: GeocodeType,
+      resolve: advert => advert.geocode
+    },    
     replies: {
       type: new GraphQLList(ReplyType),
       resolve: ({ phoneNumber }, args, { db }) => service.allReplies(phoneNumber, db[dbname])

@@ -1,77 +1,83 @@
-import { GraphQLString, GraphQLBoolean, GraphQLInt, GraphQLInputObjectType } from 'graphql'
+import { GraphQLString, GraphQLList, GraphQLBoolean, GraphQLInt, GraphQLInputObjectType } from 'graphql'
 import { inputTypeName, typeNames } from './constants'
 
-
-const PriceType = new GraphQLInputObjectType({
-  name: `${inputTypeName}${typeNames.PRICE}`,
+const HouseholdType = new GraphQLInputObjectType({
+  name: `${inputTypeName}${typeNames.HOUSEHOLD}`,
   fields: {
-    unit: { type: GraphQLString },
-    value: { type: GraphQLInt }
+    pets: { type: GraphQLString },
+    rooms: { type: GraphQLString },
+    gender: { type: GraphQLString },
+    smoker: { type: GraphQLString },
+    language: { type: GraphQLString },
+    flatmates: { type: GraphQLString },
+    occupation: { type: GraphQLString }
   }
 })
 
-const AuthorType = new GraphQLInputObjectType({
-  name: `${inputTypeName}${typeNames.AUTHOR}`,
+const ExtraCostsType = new GraphQLInputObjectType({
+  name: `${inputTypeName}${typeNames.EXTRA_COSTS}`,
   fields: {
-    name: { type: GraphQLString },
-    type: { type: GraphQLString }
-  }
-})
-
-const LocationType = new GraphQLInputObjectType({
-  name: `${inputTypeName}${typeNames.LOCATION}`,
-  fields: {
-    area: { type: GraphQLString },
-    postcode: { type: GraphQLString }
-  }
-})
-
-const AmenitiesType = new GraphQLInputObjectType({
-  name: `${inputTypeName}${typeNames.AMENITIES}`,
-  fields: {
-    balcony: { type: GraphQLString },
-    garden: { type: GraphQLString },
-    parking: { type: GraphQLString }
-  }
-})
-
-const AvabilityType = new GraphQLInputObjectType({
-  name: `${inputTypeName}${typeNames.AVABILITY}`,
-  fields: {
-    date: { type: GraphQLString },
-    minimum: { type: GraphQLString },
-    maximum: { type: GraphQLString }
+    deposit: { type: GraphQLString },
+    feesApply: { type: GraphQLString },
+    billsIncluded: { type: GraphQLString }
   }
 })
 
 const PreferencesType = new GraphQLInputObjectType({
   name: `${inputTypeName}${typeNames.PREFERENCES}`,
   fields: {
+    dss: { type: GraphQLString },
+    pets: { type: GraphQLString },
+    gender: { type: GraphQLString },
     couples: { type: GraphQLString },
-    gender: { type: GraphQLString }
+    smoking: { type: GraphQLString },
+    occupation: { type: GraphQLString },
+    references: { type: GraphQLString }
   }
+})
 
+const AmenitiesType = new GraphQLInputObjectType({
+  name: `${inputTypeName}${typeNames.AMENITIES}`,
+  fields: {
+    parking: { type: GraphQLString },
+    garage: { type: GraphQLString },
+    furnishing: { type: GraphQLString },
+    garden: { type: GraphQLString },
+    balcony: { type: GraphQLString },
+    disabledAccess: { type: GraphQLString },
+    sharedLivingRoom: { type: GraphQLString },
+    broadband: { type: GraphQLString }
+  }
+})
+
+const GeocodeType = new GraphQLInputObjectType({
+  name: `${inputTypeName}${typeNames.GEOCODE}`,
+  fields: {
+    lat: { type: GraphQLInt },
+    lng: { type: GraphQLInt }
+  }
 })
 
 const BotInputType = new GraphQLInputObjectType({
   name: inputTypeName,
   fields: {
     _id: { type: GraphQLString },
-    price: { type: PriceType },
-    author: { type: AuthorType },
-    url: { type: GraphQLString },
+    hostName: { type: GraphQLString },
     title: { type: GraphQLString },
-    contact: { type: GraphQLString },
-    crawled: { type: GraphQLBoolean },
-    location: { type: LocationType },
-    amenities: { type: AmenitiesType },
-    avability: { type: AvabilityType },
+    description: { type: GraphQLString },
+    price: { type: GraphQLInt },
+    photos: { type: new GraphQLList(GraphQLString) },
+    availabilityFrom: { type: GraphQLString },
+    availabilityTo: { type: GraphQLString },
+    postcode: { type: GraphQLString },
+    city: { type: GraphQLString },
     disabled: { type: GraphQLBoolean },
     submitted: { type: GraphQLBoolean },
-    phoneNumber: { type: GraphQLString },
-    submittedBy: { type: GraphQLString },
+    geocode: { type: GeocodeType },
+    household: { type: HouseholdType },
+    extraCosts: { type: ExtraCostsType },
     preferences: { type: PreferencesType },
-    receivedMessage: { type: GraphQLBoolean },
+    amenities: { type: AmenitiesType }
   }
 })
 
