@@ -9,7 +9,8 @@ export const typeNames = {
   AMENITIES: 'Amenities',
   PREFERENCES: 'Preferences',
   HOUSEHOLD: 'Household',
-  EXTRA_COSTS: 'ExtraCosts'
+  EXTRA_COSTS: 'ExtraCosts',
+  GEOCODE: 'Geocode',
 }
 
 export const adverts = 'adverts'
