@@ -11,7 +11,6 @@ const searchArgs = {
   listed: { type: GraphQLBoolean },
   sortBy: { type: GraphQLString },
   direction: { type: GraphQLString },
-  bot: { type: GraphQLBoolean },
 }
 
 export const listings = {
