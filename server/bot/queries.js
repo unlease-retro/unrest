@@ -9,7 +9,7 @@ const searchArgs = {
   submitted: { type: GraphQLBoolean },
   disabled: { type: GraphQLBoolean },
   crawled: { type: GraphQLBoolean },
-  limit: { type: GraphQLInt },
+  limit: { type: GraphQLInt, defaultValue: 0 },
 }
 
 export const allAdverts = {

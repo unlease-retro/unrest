@@ -1,4 +1,4 @@
-import { GraphQLString, GraphQLList, GraphQLBoolean, GraphQLInt, GraphQLInputObjectType } from 'graphql'
+import { GraphQLString, GraphQLList, GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLInputObjectType } from 'graphql'
 import { inputTypeName, typeNames } from './constants'
 
 const HouseholdType = new GraphQLInputObjectType({
@@ -53,8 +53,8 @@ const AmenitiesType = new GraphQLInputObjectType({
 const GeocodeType = new GraphQLInputObjectType({
   name: `${inputTypeName}${typeNames.GEOCODE}`,
   fields: {
-    lat: { type: GraphQLInt },
-    lng: { type: GraphQLInt }
+    lat: { type: GraphQLFloat },
+    lng: { type: GraphQLFloat }
   }
 })
 
@@ -74,6 +74,7 @@ const BotInputType = new GraphQLInputObjectType({
     availabilityTo: { type: GraphQLString },
     postcode: { type: GraphQLString },
     city: { type: GraphQLString },
+    crawled: { type: GraphQLBoolean },
     disabled: { type: GraphQLBoolean },
     submitted: { type: GraphQLBoolean },
     geocode: { type: GeocodeType },
