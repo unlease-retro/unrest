@@ -74,6 +74,7 @@ const BotInputType = new GraphQLInputObjectType({
     availabilityTo: { type: GraphQLString },
     postcode: { type: GraphQLString },
     city: { type: GraphQLString },
+    crawled: { type: GraphQLBoolean },
     disabled: { type: GraphQLBoolean },
     submitted: { type: GraphQLBoolean },
     geocode: { type: GeocodeType },
