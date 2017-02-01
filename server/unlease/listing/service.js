@@ -11,6 +11,8 @@ import { service as UserService } from '../user'
 
 export const createListing = (token, data) => API.post(`${API_UNLEASE}/resource/listing`, data, token)
 
+export const removeListing = (token, id) => API.remove(`${API_UNLEASE}/resource/listing/${id}`, token)
+
 export const updateListing = (token, data) => API.put(`${API_UNLEASE}/resource/listing`, data, token)
 
 export const createBotListing = (token, data) => API.post(`${API_UNLEASE}/resource/botListing`, data, token)

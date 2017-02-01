@@ -14,6 +14,7 @@ const ListingType = new GraphQLObjectType({
   name,
   fields: () => ({
     id: { type: GraphQLString },
+    bot: { type: GraphQLBoolean },
     availableFrom: { type: GraphQLFloat },
     availableTo: { type: GraphQLFloat },
     contactNumber: { type: GraphQLString },

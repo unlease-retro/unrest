@@ -27,6 +27,26 @@ export const createListing = mutationWithClientMutationId({
   })
 })
 
+export const removeListing = mutationWithClientMutationId({
+  name:'RemoveListing',
+  inputFields: {
+    id: { type: GraphQLString }
+  },
+  outputFields: {
+    listing: {
+      type: Type,
+      resolve: payload => payload
+    }
+  },
+  mutateAndGetPayload: ({ id }, { token }) => service.removeListing(token, id).then( json => {
+
+    if (json.error) throw new Error(json.error)
+
+    return json
+
+  } )
+})
+
 export const createUserWithListing = mutationWithClientMutationId({
   name: 'CreateUserWithListing',
   inputFields: {

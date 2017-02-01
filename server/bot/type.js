@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLBoolean } from 'graphql'
+import { GraphQLObjectType, GraphQLString, GraphQLFloat, GraphQLInt, GraphQLList, GraphQLBoolean } from 'graphql'
 
 import { typeName, typeNames, dbname } from './constants'
 import * as service from './service'
@@ -55,8 +55,8 @@ const AmenitiesType = new GraphQLObjectType({
 const GeocodeType = new GraphQLObjectType({
   name: `${typeName}${typeNames.GEOCODE}`,
   fields: {
-    lat: { type: GraphQLInt },
-    lng: { type: GraphQLInt }
+    lat: { type: GraphQLFloat },
+    lng: { type: GraphQLFloat }
   }
 })
 
