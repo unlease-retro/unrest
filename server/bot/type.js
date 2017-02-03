@@ -79,6 +79,7 @@ const BotType = new GraphQLObjectType({
     url: { type: GraphQLString },
     homeType: { type: GraphQLString },
     advertId: { type: GraphQLString },
+    listingId: { type: GraphQLString },
     phoneNumber: { type: GraphQLString },
     hostName: { type: GraphQLString },
     title: { type: GraphQLString },
@@ -111,7 +112,7 @@ const BotType = new GraphQLObjectType({
     geocode: {
       type: GeocodeType,
       resolve: advert => advert.geocode
-    },    
+    },
     replies: {
       type: new GraphQLList(ReplyType),
       resolve: ({ phoneNumber }, args, { db }) => service.allReplies(phoneNumber, db[dbname])

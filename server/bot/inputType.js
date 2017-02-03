@@ -65,6 +65,7 @@ const BotInputType = new GraphQLInputObjectType({
     url: { type: GraphQLString },
     homeType: { type: GraphQLString },
     advertId: { type: GraphQLString },
+    listingId: { type: GraphQLString },
     phoneNumber: { type: GraphQLString },
     hostName: { type: GraphQLString },
     title: { type: GraphQLString },
