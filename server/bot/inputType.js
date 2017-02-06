@@ -10,7 +10,10 @@ const HouseholdType = new GraphQLInputObjectType({
     smoker: { type: GraphQLString },
     language: { type: GraphQLString },
     flatmates: { type: GraphQLString },
-    occupation: { type: GraphQLString }
+    occupation: { type: GraphQLString },
+    nationality: { type: GraphQLString },
+    interests: { type: GraphQLString },
+    age: { type: GraphQLInt }
   }
 })
 
@@ -32,7 +35,10 @@ const PreferencesType = new GraphQLInputObjectType({
     couples: { type: GraphQLString },
     smoking: { type: GraphQLString },
     occupation: { type: GraphQLString },
-    references: { type: GraphQLString }
+    references: { type: GraphQLString },
+    minAge: { type: GraphQLString },
+    maxAge: { type: GraphQLString },
+    vegetarian: { type: GraphQLString }
   }
 })
 
