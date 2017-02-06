@@ -40,3 +40,18 @@ export const sendSms = (req, res, next) => {
     }, e => next(e) )
 
 }
+
+export const updatePhone = (req, res, next) => {
+
+  const [ userId, contactNumber ] = req.body.text.split(' ')
+
+  return Webhooks.updatePhone(userId, contactNumber)
+    .then( json => {
+
+      res.status(200).json(json)
+
+      return next()
+
+    }, e => next(e) )
+
+}
