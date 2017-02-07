@@ -82,6 +82,7 @@ const BotType = new GraphQLObjectType({
   name: typeName,
   fields: {
     _id: { type: GraphQLString },
+    id: { type: GraphQLString, resolve: bot => bot._id },
     url: { type: GraphQLString },
     homeType: { type: GraphQLString },
     advertId: { type: GraphQLString },
