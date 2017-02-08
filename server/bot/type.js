@@ -98,6 +98,8 @@ const BotType = new GraphQLObjectType({
     availabilityTo: { type: GraphQLString },
     postcode: { type: GraphQLString },
     city: { type: GraphQLString },
+    numOfFemale: { type: GraphQLInt },
+    numOfMale: { type: GraphQLInt },
     crawled: { type: GraphQLBoolean },
     disabled: { type: GraphQLBoolean },
     submitted: { type: GraphQLBoolean },
