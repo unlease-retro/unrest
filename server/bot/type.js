@@ -74,7 +74,7 @@ const ReplyType = new GraphQLObjectType({
     host: { type: GraphQLBoolean },
     thread: { type: GraphQLString },
     message: { type: GraphQLString },
-    createdAt: { type: GraphQLString }
+    createdAt: { type: GraphQLFloat }
   }
 })
 

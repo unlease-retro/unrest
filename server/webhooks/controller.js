@@ -1,4 +1,5 @@
 import * as Webhooks from './service'
+import { connector as BotConnector, service as BotService } from '../bot'
 
 export const notify = (req, res, next) => {
 
@@ -15,9 +16,11 @@ export const notify = (req, res, next) => {
 
 export const receiveSms = (req, res, next) => {
 
-  const { body, from } = req.body
+  const { Body, From } = req.body
 
-  return Webhooks.notify({ text: `SMS received from ${from}: ${body}` })
+  return BotConnector
+    .then( db => BotService.createReply({ createdAt: `${Date.now()}`, host: true, message: Body, thread: From }, db) )
+    .then( () => Webhooks.notify({ text: `SMS received from ${From}: ${Body}` }) )
     .then( (res) => {
 
       res.status(200).json({})

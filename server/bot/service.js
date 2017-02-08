@@ -10,3 +10,5 @@ export const updateAdvert = ({ _id, payload }, db) => db.collection( adverts ).f
 export const createAdvert = ({ payload }, db) => db.collection( adverts ).insert( payload )
 
 export const allReplies = (thread, db) => db.collection( replies ).find( { thread } ).toArray()
+
+export const createReply = (reply, db) => db.collection(replies).insertOne(reply)
