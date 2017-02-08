@@ -13,7 +13,8 @@ const HouseholdType = new GraphQLInputObjectType({
     occupation: { type: GraphQLString },
     nationality: { type: GraphQLString },
     interests: { type: GraphQLString },
-    age: { type: GraphQLInt }
+    housemates: { type: GraphQLString },
+    ages: { type: GraphQLString }
   }
 })
 
