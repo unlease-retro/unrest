@@ -6,7 +6,7 @@ import uuid from 'node-uuid'
 import { IMAGE_NAME } from './constants'
 import { API_UNLEASE } from '../../shared/constants'
 import * as API from '../../shared/services/api'
-import { getRandomDigits } from '../../shared/util'
+import { getRandomDigits, getTrimmedString } from '../../shared/util'
 import { service as UserService } from '../user'
 
 export const createListing = (token, data) => API.post(`${API_UNLEASE}/resource/listing`, data, token)
@@ -39,7 +39,7 @@ export const createUserWithListing = (token, { listing, user}) => {
   const { photo: { imageList } } = listing
 
   // generate email and password
-  const password = `${user.firstName}${getRandomDigits(3)}`
+  const password = `${getTrimmedString(user.firstName)}${getRandomDigits(3)}`
   const email = `${password}@unleasemail.io`
 
   return UserService.createUser(token, { ...user, email, password })
@@ -52,6 +52,7 @@ export const createUserWithListing = (token, { listing, user}) => {
     } )
     .then( listing => uploadImages(listing.id, imageList).then( imageList => updateListing(accessToken, { ...listing, photo: { imageList: imageList.map( ({ s3Link }) => ({ s3Link, name: `${IMAGE_NAME}-${uuid.v4()}${path.extname(s3Link)}` })), sectionCompleted: true } }) ) )
     .then( listing => createBotListing(token, { listingId: listing.id }) )
+    .then( res => ({ ...res, email }) )
 
 }
 

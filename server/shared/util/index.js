@@ -13,3 +13,5 @@ export const getRandomDigits = (count=3) => {
   return Math.floor( Math.random() * 9 * base ) + base
 
 }
+
+export const getTrimmedString = str => str.replace(/\W/g, '')

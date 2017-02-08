@@ -53,18 +53,16 @@ export const createUserWithListing = mutationWithClientMutationId({
     payload: { type: UserWithListingInputType },
   },
   outputFields: {
-    listing: {
-      type: Type,
-      resolve: payload => payload
-    }
+    listingId: { type: GraphQLString, resolve: payload => payload.id },
+    email: { type: GraphQLString, resolve: payload => payload.email }
   },
   mutateAndGetPayload: ({ payload }, { token }) => service.createUserWithListing(token, payload).then( json => {
 
     if (json.error) throw new Error(json.error)
 
-    const { id } = json
+    const { id, email } = json
 
-    return { id }
+    return { id, email }
 
   })
 })
