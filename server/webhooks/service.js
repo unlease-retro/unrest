@@ -15,6 +15,13 @@ export const updatePhone = (userId, contactNumber) => {
 
   return connector
     .then( db => db.collection('user').findOneAndUpdate({ _id: ObjectID(userId) }, { $set: { 'phoneVerification.contactNumber': contactNumber } }, { returnOriginal: false }) )
-    .then( () => ({ response_type: 'ephemeral', text: `Phone number updated ⚡️ [ user: ${userId}, number: ${contactNumber} ]` }) )
+    .then( ({ value }) => {
+
+      if ( !value ) throw new Error('Oops! Couldn\'t find an Unleaser with that ID.')
+
+      return value
+
+    } )
+    .then( res => ({ response_type: 'ephemeral', text: `Phone number updated ⚡️ [ user: ${res.firstName} ${res.lastName}, number: ${res.phoneVerification.contactNumber} ]` }) )
 
 }
