@@ -38,9 +38,9 @@ export const removeListing = mutationWithClientMutationId({
       resolve: payload => payload
     }
   },
-  mutateAndGetPayload: ({ id }, { token }) => service.removeListing(token, id).then( json => {
+  mutateAndGetPayload: ({ id }, { token }) => service.removeListing(token, id).then( res => {
 
-    if (json.error) throw new Error(json.error)
+    if (res.status !== 200) throw new Error(res.statusText)
 
     return { id }
 

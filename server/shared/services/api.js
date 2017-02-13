@@ -71,4 +71,4 @@ export const remove = (route, token) => fetch(route, {
     'Content-Type': 'application/json',
     'Authorization': token
   }
-}).then( res => res.json() )
+})
