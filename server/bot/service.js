@@ -7,8 +7,8 @@ export const advert = ({ _id }, db) => db.collection( adverts ).findOne( { _id: 
 
 export const updateAdvert = ({ _id, payload }, db) => db.collection( adverts ).findOneAndUpdate({ _id: ObjectID(_id) }, { $set: { ...payload } }, { returnOriginal: false })
 
-export const createAdvert = ({ payload }, db) => db.collection( adverts ).insert( payload )
+export const createAdvert = ({ payload }, db) => db.collection( adverts ).insertOne( payload )
 
 export const allReplies = (thread, db) => db.collection( replies ).find( { thread } ).toArray()
 
-export const createReply = (reply, db) => db.collection(replies).insertOne(reply)
+export const createReply = (reply, db) => db.collection( replies ).insertOne( reply )
