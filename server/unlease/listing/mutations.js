@@ -33,6 +33,10 @@ export const removeListing = mutationWithClientMutationId({
     id: { type: GraphQLString }
   },
   outputFields: {
+    deletedListingId: {
+      type: GraphQLString,
+      resolve: payload => payload.id
+    },
     listing: {
       type: Type,
       resolve: payload => payload
