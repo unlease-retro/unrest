@@ -23,7 +23,6 @@ const HouseholdType = new GraphQLObjectType({
 const ExtraCostsType = new GraphQLObjectType({
   name: `${typeName}${typeNames.EXTRA_COSTS}`,
   fields: {
-    deposit: { type: GraphQLString },
     feesApply: { type: GraphQLString },
     billsIncluded: { type: GraphQLString }
   }
@@ -93,6 +92,7 @@ const BotType = new GraphQLObjectType({
     title: { type: GraphQLString },
     description: { type: GraphQLString },
     price: { type: GraphQLInt },
+    deposit: { type: GraphQLInt },
     photos: { type: new GraphQLList(GraphQLString) },
     availabilityFrom: { type: GraphQLString },
     availabilityTo: { type: GraphQLString },
