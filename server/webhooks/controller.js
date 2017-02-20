@@ -31,19 +31,6 @@ export const receiveSms = (req, res, next) => {
 
 }
 
-export const sendSms = (req, res, next) => {
-
-  return Webhooks.sendSms(req.body)
-    .then( () => {
-
-      res.status(200).json({})
-
-      return next()
-
-    }, e => next(e) )
-
-}
-
 export const updatePhone = (req, res, next) => {
 
   const [ userId, contactNumber ] = req.body.text.split(' ')
