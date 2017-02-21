@@ -21,7 +21,7 @@ export const receiveSms = (req, res, next) => {
   return BotConnector
     .then( db => BotService.createReply({ createdAt: `${Date.now()}`, host: true, message: Body, thread: From }, db) )
     .then( () => Webhooks.notify({ text: `SMS received from ${From}: ${Body}` }) )
-    .then( (res) => {
+    .then( () => {
 
       res.status(200).json({})
 
