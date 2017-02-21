@@ -66,7 +66,7 @@ const GeocodeType = new GraphQLObjectType({
   }
 })
 
-export const ReplyType = new GraphQLObjectType({
+const ReplyType = new GraphQLObjectType({
   name: `${typeName}${typeNames.REPLY}`,
   fields: {
     _id: { type: GraphQLString },

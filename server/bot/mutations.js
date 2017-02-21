@@ -2,8 +2,8 @@
 import { GraphQLString, } from 'graphql'
 import { mutationWithClientMutationId } from 'graphql-relay'
 
-import Type, { ReplyType } from './type'
-import InputType, { ReplyInputType } from './inputType'
+import Type from './type'
+import InputType from './inputType'
 
 import { dbname } from './constants'
 import * as service from './service'
@@ -69,14 +69,14 @@ export const sendAdvertMessage = mutationWithClientMutationId({
   name: 'SendAdvertMessage',
 
   inputFields: {
-    payload: {
-      type: ReplyInputType
-    }
+    _id: { type: GraphQLString },
+    phoneNumber: { type: GraphQLString },
+    message: { type: GraphQLString },
   },
 
   outputFields: {
-    replies: {
-      type: ReplyType,
+    advert: {
+      type: Type,
       resolve: payload => payload
     }
   },
@@ -85,8 +85,10 @@ export const sendAdvertMessage = mutationWithClientMutationId({
 
     if (json.error) throw new Error(json.error)
 
-    // json.ops.shift()
-    return json.ops[0]
+    return {
+      _id: input._id,
+      phoneNumber: input.phoneNumber
+    }
 
   })
    

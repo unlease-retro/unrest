@@ -96,14 +96,4 @@ const BotInputType = new GraphQLInputObjectType({
   }
 })
 
-export const ReplyInputType = new GraphQLInputObjectType({
-  name: `${inputTypeName}${typeNames.REPLY}`,
-  fields: {
-    createdAt: { type: GraphQLString },
-    host: { type: GraphQLBoolean },
-    message: { type: GraphQLString },
-    thread: { type: GraphQLString },
-  }
-})
-
 export default BotInputType

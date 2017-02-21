@@ -15,12 +15,5 @@ export const allReplies = (thread, db) => db.collection( replies ).find( { threa
 
 export const createReply = (reply, db) => db.collection( replies ).insertOne( reply )
 
-export const sendSms = ({ payload }, db) => {
-
-  const { _id, message } = payload
-
-  return advert({ _id }, db)
-    .then( advert => Webhooks.sendSms({ to: advert.phoneNumber, body: message }) )
-    .then( ({ to, body }) => createReply({ createdAt: `${Date.now()}`, host: false, message: body, thread: to }, db) )
-
-}
+export const sendSms = ({ phoneNumber, message }, db) => Webhooks.sendSms({ to: phoneNumber, body: message })
+  .then( ({ to, body }) => createReply({ createdAt: `${Date.now()}`, host: false, message: body, thread: to }, db) )
