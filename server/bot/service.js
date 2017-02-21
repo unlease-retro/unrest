@@ -7,6 +7,8 @@ export const allAdverts = ({ submitted, disabled, crawled, limit }, db) => db.co
 
 export const advert = ({ _id }, db) => db.collection( adverts ).findOne( { _id: ObjectID( _id ) } )
 
+export const advertByPhoneNumber = ({ phoneNumber }, db) => db.collection( adverts ).findOne( { phoneNumber } )
+
 export const updateAdvert = ({ _id, payload }, db) => db.collection( adverts ).findOneAndUpdate({ _id: ObjectID(_id) }, { $set: { ...payload } }, { returnOriginal: false })
 
 export const createAdvert = ({ payload }, db) => db.collection( adverts ).insertOne( payload )
