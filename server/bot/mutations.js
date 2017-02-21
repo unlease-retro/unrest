@@ -83,11 +83,13 @@ export const sendAdvertMessage = mutationWithClientMutationId({
 
   mutateAndGetPayload: (input, { db }) => service.sendSms(input, db[dbname]).then(json => {
 
+    const { _id, phoneNumber } = input
+
     if (json.error) throw new Error(json.error)
 
     return {
-      _id: input._id,
-      phoneNumber: input.phoneNumber
+      _id,
+      phoneNumber
     }
 
   })
