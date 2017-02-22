@@ -57,8 +57,62 @@ export const createAdvert = mutationWithClientMutationId({
 
     if (json.error) throw new Error(json.error)
 
-    // json.ops.shift()
-    return json.ops[0]
+    return json.ops.shift()
+
+  })
+
+})
+
+export const sendAdvertMessage = mutationWithClientMutationId({
+  name: 'SendAdvertMessage',
+
+  inputFields: {
+    _id: { type: GraphQLString },
+    phoneNumber: { type: GraphQLString },
+    message: { type: GraphQLString },
+  },
+
+  outputFields: {
+    advert: {
+      type: Type,
+      resolve: payload => payload
+    }
+  },
+
+  mutateAndGetPayload: (input, { db }) => service.sendSms(input, db[dbname]).then(json => {
+
+    const { _id, phoneNumber } = input
+
+    if (json.error) throw new Error(json.error)
+
+    return {
+      _id,
+      phoneNumber
+    }
+
+  })
+   
+})
+
+export const addBlacklist = mutationWithClientMutationId({
+  name: 'AddBlacklist',
+
+  inputFields: {
+    phoneNumber: { type: GraphQLString },
+  },
+
+  outputFields: {
+    advert: {
+      type: Type,
+      resolve: payload => payload
+    }
+  },
+
+  mutateAndGetPayload: (input, { db }) => service.addBlacklist(input, db[dbname]).then(json => {
+
+    if (json.error) throw new Error(json.error)
+
+    return json.ops.shift()
 
   })
 

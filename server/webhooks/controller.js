@@ -18,29 +18,20 @@ export const receiveSms = (req, res, next) => {
 
   const { Body, From } = req.body
 
+  let db
+
   return BotConnector
-    .then( db => BotService.createReply({ createdAt: `${Date.now()}`, host: true, message: Body, thread: From }, db) )
-    .then( () => Webhooks.notify({ text: `SMS received from ${From}: ${Body}` }) )
-    .then( (res) => {
-
-      res.status(200).json({})
-
-      return next()
-
-    }, e => next(e) )
-
-}
-
-export const sendSms = (req, res, next) => {
-
-  return Webhooks.sendSms(req.body)
+    .then( database => db = database )
+    .then( () => BotService.createReply({ createdAt: `${Date.now()}`, host: true, message: Body, thread: From }, db) )
+    .then( () => BotService.advertByPhoneNumber({ phoneNumber: From }, db) )
+    .then( advert => Webhooks.notify({ text: `📲 SMS received from ${From}: _${Body}_, \n➡️ go to http://local.unlease.io:7000/bot/${advert._id} to reply` }) )
     .then( () => {
 
       res.status(200).json({})
-
+          
       return next()
 
-    }, e => next(e) )
+    }, e => next(e))
 
 }
 

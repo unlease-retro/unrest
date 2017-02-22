@@ -66,11 +66,10 @@ const GeocodeType = new GraphQLObjectType({
   }
 })
 
-
 const ReplyType = new GraphQLObjectType({
   name: `${typeName}${typeNames.REPLY}`,
   fields: {
-    id: { type: GraphQLString },
+    _id: { type: GraphQLString },
     host: { type: GraphQLBoolean },
     thread: { type: GraphQLString },
     message: { type: GraphQLString },
