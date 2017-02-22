@@ -27,3 +27,11 @@ export const advert = {
   },
   resolve: (root, args, { db }) => service.advert(args, db[dbname])
 }
+
+export const blacklist = {
+  type: Type,
+  args: {
+    phoneNumber: { type: GraphQLString }
+  },
+  resolve: (root, args, { db }) => service.blacklist(args, db[dbname])
+}

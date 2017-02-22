@@ -94,7 +94,6 @@ export const sendAdvertMessage = mutationWithClientMutationId({
    
 })
 
-
 export const addBlacklist = mutationWithClientMutationId({
   name: 'AddBlacklist',
 
