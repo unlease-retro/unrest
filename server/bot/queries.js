@@ -27,4 +27,3 @@ export const advert = {
   },
   resolve: (root, args, { db }) => service.advert(args, db[dbname])
 }
-
