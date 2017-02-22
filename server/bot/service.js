@@ -11,7 +11,16 @@ export const advertByPhoneNumber = ({ phoneNumber }, db) => db.collection( adver
 
 export const updateAdvert = ({ _id, payload }, db) => db.collection( adverts ).findOneAndUpdate({ _id: ObjectID(_id) }, { $set: { ...payload } }, { returnOriginal: false })
 
-export const createAdvert = ({ payload }, db) => db.collection( adverts ).insertOne( payload )
+export const createAdvert = ({ payload }, db) => findBlacklist( {phoneNumber:  payload.phoneNumber }, db)
+  .then(( blackListedPhoneNumber ) => {
+
+    if (blackListedPhoneNumber) throw new Error(` Phone number ${ blackListedPhoneNumber.phoneNumber } already blacklisted`)
+
+    return db.collection(adverts).insertOne(payload)
+
+  })
+
+
 
 export const allReplies = (thread, db) => db.collection( replies ).find( { thread } ).toArray()
 
