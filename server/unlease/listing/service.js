@@ -39,7 +39,7 @@ export const createUserWithListing = (token, { listing, user}) => {
   const { photo: { imageList } } = listing
 
   // generate email and password
-  const password = `${getTrimmedString(user.firstName)}${getRandomDigits(3)}`
+  const password = `${getTrimmedString(user.firstName.toLowerCase())}${getRandomDigits(3)}`
   const email = `${password}@unleasemail.io`
 
   return UserService.createUser(token, { ...user, email, password })
