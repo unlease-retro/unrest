@@ -46,6 +46,7 @@ export const createUserWithListing = (token, { listing, user}) => {
     .then( ({ access_token }) => {
 
       accessToken = `Bearer ${access_token}`
+      listing.description && listing.description.title && console.log('create listing -> ' + listing.description.title)
 
       return createListing(accessToken, listing)
 
