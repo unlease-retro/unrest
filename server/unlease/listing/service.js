@@ -46,13 +46,11 @@ export const createUserWithListing = (token, { listing, user}) => {
     .then( ({ access_token }) => {
 
       accessToken = `Bearer ${access_token}`
-      listing.description && listing.description.title && console.log('create listing -> ' + listing.description.title)
-
       return createListing(accessToken, listing)
 
     } )
     .then( listing => uploadImages(listing.id, imageList).then( imageList => updateListing(accessToken, { ...listing, photo: { imageList: imageList.map( ({ s3Link }) => ({ s3Link, name: `${IMAGE_NAME}-${uuid.v4()}${path.extname(s3Link)}` })), sectionCompleted: true }, pipeline: true }) ) )
-    .then( listing => createBotListing(token, { listingId: listing.id }) )
+    .then( listing => createBotListing(accessToken, { listingId: listing.id }) )
     .then( res => ({ ...res, email }) )
 
 }
