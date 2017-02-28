@@ -9,7 +9,7 @@ export const advert = ({ _id }, db) => db.collection( adverts ).findOne( { _id: 
 
 export const advertByPhoneNumber = ({ phoneNumber }, db) => db.collection( adverts ).findOne( { phoneNumber } )
 
-export const createAdvert = ({ payload }, db) => db.collection(adverts).insertOne(payload)
+export const createAdvert = ({ payload }, db) => db.collection(adverts).insertOne({ ...payload, createdAt: `${Date.now()}`, updatedAt: `${Date.now()}` })
 
 export const allReplies = (thread, db) => db.collection( replies ).find( { thread } ).toArray()
 
@@ -20,18 +20,16 @@ export const updateAdvert = ({ _id, payload }, db) => {
   // if we updating phoneNumber
   if (phoneNumber) {
 
-    return allBlacklist({ phoneNumber }, db)
+    allBlacklist({ phoneNumber }, db)
       .then( isBlacklisted => {
 
         if (isBlacklisted) throw new Error(`Phone number ${isBlacklisted.phoneNumber} is blacklisted`)
-
-        return db.collection( adverts ).findOneAndUpdate({ _id: ObjectID(_id) }, { $set: { ...payload } }, { returnOriginal: false })
 
       } )
 
   }
 
-  return db.collection( adverts ).findOneAndUpdate({ _id: ObjectID(_id) }, { $set: { ...payload } }, { returnOriginal: false })
+  return db.collection( adverts ).findOneAndUpdate({ _id: ObjectID(_id) }, { $set: { ...payload, updatedAt: `${Date.now()}` } }, { returnOriginal: false })
 
 }
 
