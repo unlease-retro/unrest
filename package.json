@@ -73,6 +73,7 @@
     "node-uuid": "^1.4.7",
     "per-env": "^1.0.2",
     "query-string": "^4.3.1",
+    "ramda": "^0.23.0",
     "request-promise": "^4.1.1",
     "twilio": "^2.11.1"
   }

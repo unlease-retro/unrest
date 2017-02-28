@@ -102,6 +102,9 @@ const BotType = new GraphQLObjectType({
     crawled: { type: GraphQLBoolean },
     disabled: { type: GraphQLBoolean },
     submitted: { type: GraphQLBoolean },
+    createdAt: { type: GraphQLFloat },
+    updatedAt: { type: GraphQLFloat },
+    serviceFee: { type: GraphQLFloat },
     amenities: {
       type: AmenitiesType,
       resolve: advert => advert.amenities

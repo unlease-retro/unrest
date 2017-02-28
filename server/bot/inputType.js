@@ -92,7 +92,10 @@ const BotInputType = new GraphQLInputObjectType({
     household: { type: HouseholdType },
     extraCosts: { type: ExtraCostsType },
     preferences: { type: PreferencesType },
-    amenities: { type: AmenitiesType }
+    amenities: { type: AmenitiesType },
+    serviceFee: { type: GraphQLFloat },
+    createdAt: { type: GraphQLFloat },
+    updatedAt: { type: GraphQLFloat }
   }
 })
 
