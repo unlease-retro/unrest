@@ -31,7 +31,7 @@ export const uploadImages = (listingId, images) => {
 
 }
 
-export const createUserWithListing = (token, { listing, user}) => {
+export const createUserWithListing = (token, { listing, user }) => {
 
   let accessToken
 
