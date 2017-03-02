@@ -31,7 +31,7 @@ export const uploadImages = (listingId, images) => {
 
 }
 
-export const createUserWithListing = (token, { listing, email, user }) => {
+export const createUserWithListing = (token, email, { listing, user }) => {
 
   let accessToken
 
@@ -45,12 +45,13 @@ export const createUserWithListing = (token, { listing, email, user }) => {
     .then( ({ access_token }) => {
 
       accessToken = `Bearer ${access_token}`
+
       return createListing(accessToken, listing)
 
     } )
     .then( listing => uploadImages(listing.id, imageList).then( imageList => updateListing(accessToken, { ...listing, photo: { imageList: imageList.map( ({ s3Link }) => ({ s3Link, name: `${IMAGE_NAME}-${uuid.v4()}${path.extname(s3Link)}` })), sectionCompleted: true }, pipeline: true }) ) )
     .then( listing => createBotListing(accessToken, { listingId: listing.id }) )
-    .then( res => ({ ...res, email }) )
+    .then( res => ({ ...res, email, password }) )
 
 }
 

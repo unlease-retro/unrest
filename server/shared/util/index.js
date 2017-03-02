@@ -10,7 +10,7 @@ export const getBasicAuth = () => require('btoa')('unlease-api:secret')
 
 export const getCapitalize = string => `${string.charAt(0).toUpperCase()}${string.slice(1)}`
 
-export const getUserPassword = email => getCapitalize(email.replace(/@unleasemail.io/g, ''))
+export const getUserPassword = email => getCapitalize(email.replace(/@.*$/, ''))
 
 export const getDeepMerge = (a, b) => R.isArrayLike(b) && !R.is(Object, b[0]) ? b : (R.is(Object, a) && R.is(Object, b)) ? R.mergeWith(getDeepMerge, a, b) : b
 
