@@ -6,7 +6,7 @@ import uuid from 'node-uuid'
 import { IMAGE_NAME } from './constants'
 import { API_UNLEASE } from '../../shared/constants'
 import * as API from '../../shared/services/api'
-import { getRandomDigits, getTrimmedString } from '../../shared/util'
+import { getUserPassword } from '../../shared/util'
 import { service as UserService } from '../user'
 
 export const createListing = (token, data) => API.post(`${API_UNLEASE}/resource/listing`, data, token)
@@ -31,16 +31,15 @@ export const uploadImages = (listingId, images) => {
 
 }
 
-export const createUserWithListing = (token, { listing, user }) => {
+export const createUserWithListing = (token, { listing, email, user }) => {
 
   let accessToken
 
   // extract image list from listing
   const { photo: { imageList } } = listing
 
-  // generate email and password
-  const password = `${getTrimmedString(user.firstName.toLowerCase())}${getRandomDigits(3)}`
-  const email = `${password}@unleasemail.io`
+  // generate password
+  const password = getUserPassword(email)
 
   return UserService.createUser(token, { ...user, email, password })
     .then( ({ access_token }) => {
