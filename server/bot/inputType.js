@@ -93,6 +93,8 @@ const BotInputType = new GraphQLInputObjectType({
     extraCosts: { type: ExtraCostsType },
     preferences: { type: PreferencesType },
     amenities: { type: AmenitiesType },
+    serviceFee: { type: GraphQLFloat },
+    email: { type: GraphQLString },
     createdAt: { type: GraphQLFloat },
     updatedAt: { type: GraphQLFloat }
   }
