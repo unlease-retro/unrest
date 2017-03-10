@@ -10,7 +10,7 @@ export const advert = ({ _id }, db) => db.collection(adverts).findOne({ _id: Obj
 
 export const advertByPhoneNumber = ({ phoneNumber }, db) => db.collection(adverts).findOne({ phoneNumber })
 
-export const createAdvert = ({ payload }, db) => db.collection(adverts).insertOne({...payload, createdAt: `${Date.now()}`, updatedAt: `${Date.now()}` })
+export const createAdvert = ({ payload }, db) => db.collection(adverts).insertOne({...payload, createdAt: `${new Date()}`, updatedAt: `${new Date()}` })
 
 export const allReplies = (thread, db) => db.collection(replies).find({ thread }).toArray()
 
@@ -32,13 +32,13 @@ export const updateAdvert = ({ _id, payload }, db) => {
 
   return db.collection(adverts).findOne({ _id: ObjectID(_id) })
     .then(advert => getDeepMerge(advert, payload))
-    .then(data => db.collection(adverts).findOneAndUpdate({ _id: ObjectID(_id) }, { $set: {...data, updatedAt: `${Date.now()}` } }, { returnOriginal: false }))
+    .then(data => db.collection(adverts).findOneAndUpdate({ _id: ObjectID(_id) }, { $set: {...data, updatedAt: `${new Date()}` } }, { returnOriginal: false }))
 
 }
 
 export const createReply = (reply, db) => db.collection(replies).insertOne(reply)
 
-export const addBlacklist = ({ phoneNumber }, db) => db.collection(blacklist).insertOne({ phoneNumber, createdAt: `${Date.now()}` })
+export const addBlacklist = ({ phoneNumber }, db) => db.collection(blacklist).insertOne({ phoneNumber, createdAt: `${new Date()}` })
 
 export const allBlacklist = ({ phoneNumber }, db) => db.collection(blacklist).findOne({ phoneNumber })
 
