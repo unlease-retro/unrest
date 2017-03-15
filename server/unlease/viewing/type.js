@@ -1,5 +1,7 @@
 import { GraphQLObjectType, GraphQLString, GraphQLFloat, GraphQLBoolean, GraphQLList } from 'graphql'
 import { Type as UserType, service as userService } from '../user'
+import { Type as ListingType, service as listingService } from '../listing'
+import * as viewingService from './service'
 
 import { name, typeNames } from './constants'
 
@@ -34,10 +36,18 @@ export const UpcomingViewingType = new GraphQLObjectType({
       type: UserType,
       resolve: ({ host }, args, { token }) => userService.getUserById(host, token)
     },
-    guest: { type: GraphQLString },
-    listing: { type: GraphQLString },
-    message: { type: GraphQLString },
+    guest: {
+      type: UserType,
+      resolve: ({ guest }, args, { token }) => userService.getUserById(guest, token)
+    },
+    listing: {
+      type: ListingType,
+      resolve: ({ listing }) => listingService.fetchListingById(listing)
+    },
+    viewing: {
+      type: ViewingType,
+      resolve: ({ message }, args, { token }) => viewingService.getViewingByMessageId(message, token)
+    },
     callUrl: { type: GraphQLString }
   }
 })
-

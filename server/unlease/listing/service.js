@@ -57,7 +57,7 @@ export const createUserWithListing = (token, email, { listing, user }) => {
 
 export const fetchListings = (token, params) => API.get(`${API_UNLEASE}/resource/listing/query?${queryString.stringify(params)}`, token)
 
-export const fetchListingById = ({ id }) => API.get(`${API_UNLEASE}/resource/listing/${id}`)
+export const fetchListingById = id => API.get(`${API_UNLEASE}/resource/listing/raw/${id}`)
 
 export const updateHostStatus = (token, params) => API.put(`${API_UNLEASE}/resource/listing/updateField`, { name: Object.keys(params).filter( p => p !== 'id' && p !== 'clientMutationId' ), listing: params }, token)
 
