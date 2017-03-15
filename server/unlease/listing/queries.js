@@ -24,3 +24,18 @@ export const listings = {
 
   })
 }
+
+
+export const listingById = {
+  type: Type,
+  args: {
+    id: { type: GraphQLString }
+  },
+  resolve: (root, args) => service.fetchListingById(args).then( json => {
+
+    if (json.error) throw new Error(json.error)
+
+    return json
+
+  })
+}
