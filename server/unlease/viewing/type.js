@@ -27,3 +27,6 @@ const ViewingType = new GraphQLObjectType({
 })
 
 export default ViewingType
+
+
+
