@@ -15,8 +15,5 @@ export const viewingByMessageId = {
 
 export const upcomingViewings = {
   type: new GraphQLList(UpcomingViewingType),
-  args: {
-    token: { type: GraphQLString },
-  },
-  resolve: (root, { token }) => service.getUpcomingViewings(token)
+  resolve: (root, args, { token }) => service.getUpcomingViewings(token)
 }

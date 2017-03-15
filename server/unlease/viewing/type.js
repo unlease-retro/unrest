@@ -1,4 +1,5 @@
 import { GraphQLObjectType, GraphQLString, GraphQLFloat, GraphQLBoolean, GraphQLList } from 'graphql'
+import { Type as UserType, service as userService } from '../user'
 
 import { name, typeNames } from './constants'
 
@@ -28,11 +29,15 @@ export const ViewingType = new GraphQLObjectType({
 
 export const UpcomingViewingType = new GraphQLObjectType({
   name: typeNames.UPCOMING_VIEWINGS,
-  fields: () => ({
-    host: { type: GraphQLString },
+  fields: {
+    host: {
+      type: UserType,
+      resolve: ({ host }, args, { token }) => userService.getUserById(host, token)
+    },
     guest: { type: GraphQLString },
     listing: { type: GraphQLString },
     message: { type: GraphQLString },
     callUrl: { type: GraphQLString }
-  })
+  }
 })
+
