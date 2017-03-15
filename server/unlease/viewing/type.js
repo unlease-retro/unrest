@@ -1,8 +1,8 @@
 import { GraphQLObjectType, GraphQLString, GraphQLFloat, GraphQLBoolean, GraphQLList } from 'graphql'
 
-import { name } from './constants'
+import { name, typeNames } from './constants'
 
-const ViewingType = new GraphQLObjectType({
+export const ViewingType = new GraphQLObjectType({
   name,
   fields: () => ({
     id: { type: GraphQLString },
@@ -26,7 +26,13 @@ const ViewingType = new GraphQLObjectType({
   })
 })
 
-export default ViewingType
-
-
-
+export const UpcomingViewingType = new GraphQLObjectType({
+  name: typeNames.UPCOMING_VIEWINGS,
+  fields: () => ({
+    host: { type: GraphQLString },
+    guest: { type: GraphQLString },
+    listing: { type: GraphQLString },
+    message: { type: GraphQLString },
+    callUrl: { type: GraphQLString }
+  })
+})

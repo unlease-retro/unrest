@@ -1,7 +1,7 @@
 import * as Listing from './listing'
 import * as Notification from './notification'
 import * as User from './user'
-import * as Viewing from './viweing'
+import * as Viewing from './viewing'
 
 export const mutations = {
   ...Listing.mutations,
