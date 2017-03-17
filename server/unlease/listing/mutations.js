@@ -54,19 +54,19 @@ export const removeListing = mutationWithClientMutationId({
 export const createUserWithListing = mutationWithClientMutationId({
   name: 'CreateUserWithListing',
   inputFields: {
+    email: { type: GraphQLString },
     payload: { type: UserWithListingInputType },
   },
   outputFields: {
     listingId: { type: GraphQLString, resolve: payload => payload.id },
-    email: { type: GraphQLString, resolve: payload => payload.email }
+    email: { type: GraphQLString, resolve: payload => payload.email },
+    password: { type: GraphQLString, resolve: payload => payload.password }
   },
-  mutateAndGetPayload: ({ payload }, { token }) => service.createUserWithListing(token, payload).then( json => {
+  mutateAndGetPayload: ({ email, payload }, { token }) => service.createUserWithListing(token, email, payload).then( json => {
 
     if (json.error) throw new Error(json.error)
 
-    const { id, email } = json
-
-    return { id, email }
+    return json
 
   })
 })

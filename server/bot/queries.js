@@ -23,7 +23,7 @@ export const allAdverts = {
 export const advert = {
   type: Type,
   args: {
-    _id: { type: GraphQLString },
+    _id: { type: GraphQLString }
   },
   resolve: (root, args, { db }) => service.advert(args, db[dbname])
 }

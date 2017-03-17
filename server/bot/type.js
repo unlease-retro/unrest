@@ -23,7 +23,6 @@ const HouseholdType = new GraphQLObjectType({
 const ExtraCostsType = new GraphQLObjectType({
   name: `${typeName}${typeNames.EXTRA_COSTS}`,
   fields: {
-    deposit: { type: GraphQLString },
     feesApply: { type: GraphQLString },
     billsIncluded: { type: GraphQLString }
   }
@@ -67,11 +66,10 @@ const GeocodeType = new GraphQLObjectType({
   }
 })
 
-
 const ReplyType = new GraphQLObjectType({
   name: `${typeName}${typeNames.REPLY}`,
   fields: {
-    id: { type: GraphQLString },
+    _id: { type: GraphQLString },
     host: { type: GraphQLBoolean },
     thread: { type: GraphQLString },
     message: { type: GraphQLString },
@@ -93,6 +91,7 @@ const BotType = new GraphQLObjectType({
     title: { type: GraphQLString },
     description: { type: GraphQLString },
     price: { type: GraphQLInt },
+    deposit: { type: GraphQLInt },
     photos: { type: new GraphQLList(GraphQLString) },
     availabilityFrom: { type: GraphQLString },
     availabilityTo: { type: GraphQLString },
@@ -103,6 +102,10 @@ const BotType = new GraphQLObjectType({
     crawled: { type: GraphQLBoolean },
     disabled: { type: GraphQLBoolean },
     submitted: { type: GraphQLBoolean },
+    createdAt: { type: GraphQLString },
+    updatedAt: { type: GraphQLString },
+    serviceFee: { type: GraphQLFloat },
+    email: { type: GraphQLString },
     amenities: {
       type: AmenitiesType,
       resolve: advert => advert.amenities

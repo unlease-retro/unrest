@@ -6,7 +6,7 @@ import uuid from 'node-uuid'
 import { IMAGE_NAME } from './constants'
 import { API_UNLEASE } from '../../shared/constants'
 import * as API from '../../shared/services/api'
-import { getRandomDigits, getTrimmedString } from '../../shared/util'
+import { getUserPassword } from '../../shared/util'
 import { service as UserService } from '../user'
 
 export const createListing = (token, data) => API.post(`${API_UNLEASE}/resource/listing`, data, token)
@@ -31,16 +31,15 @@ export const uploadImages = (listingId, images) => {
 
 }
 
-export const createUserWithListing = (token, { listing, user}) => {
+export const createUserWithListing = (token, email, { listing, user }) => {
 
   let accessToken
 
   // extract image list from listing
   const { photo: { imageList } } = listing
 
-  // generate email and password
-  const password = `${getTrimmedString(user.firstName)}${getRandomDigits(3)}`
-  const email = `${password}@unleasemail.io`
+  // generate password
+  const password = getUserPassword(email)
 
   return UserService.createUser(token, { ...user, email, password })
     .then( ({ access_token }) => {
@@ -50,13 +49,15 @@ export const createUserWithListing = (token, { listing, user}) => {
       return createListing(accessToken, listing)
 
     } )
-    .then( listing => uploadImages(listing.id, imageList).then( imageList => updateListing(accessToken, { ...listing, photo: { imageList: imageList.map( ({ s3Link }) => ({ s3Link, name: `${IMAGE_NAME}-${uuid.v4()}${path.extname(s3Link)}` })), sectionCompleted: true } }) ) )
-    .then( listing => createBotListing(token, { listingId: listing.id }) )
-    .then( res => ({ ...res, email }) )
+    .then( listing => uploadImages(listing.id, imageList).then( imageList => updateListing(accessToken, { ...listing, photo: { imageList: imageList.map( ({ s3Link }) => ({ s3Link, name: `${IMAGE_NAME}-${uuid.v4()}${path.extname(s3Link)}` })), sectionCompleted: true }, pipeline: true }) ) )
+    .then( listing => createBotListing(accessToken, { listingId: listing.id }) )
+    .then( res => ({ ...res, email, password }) )
 
 }
 
 export const fetchListings = (token, params) => API.get(`${API_UNLEASE}/resource/listing/query?${queryString.stringify(params)}`, token)
+
+export const fetchListingById = id => API.get(`${API_UNLEASE}/resource/listing/raw/${id}`)
 
 export const updateHostStatus = (token, params) => API.put(`${API_UNLEASE}/resource/listing/updateField`, { name: Object.keys(params).filter( p => p !== 'id' && p !== 'clientMutationId' ), listing: params }, token)
 
