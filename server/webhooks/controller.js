@@ -47,8 +47,9 @@ export const sendSms = (req, res, next) => {
 export const updatePhone = (req, res, next) => {
 
   const [ userId, contactNumber ] = req.body.text.split(' ')
+  const poachedBy = req.body.user_name
 
-  return Webhooks.updatePhone(userId, contactNumber)
+  return Webhooks.updatePhone(userId, contactNumber, poachedBy)
     .then( json => {
 
       res.status(200).json(json)
